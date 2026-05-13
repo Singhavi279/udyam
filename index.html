@@ -1,553 +1,829 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#0A2C5C" />
-<title>India MSME Dialogue: Atmanirbhar Udyam, UP Edition</title>
-<meta name="description" content="Inaugural India MSME Dialogue, Uttar Pradesh. 2 days, 700 delegates, 60+ speakers: government, banks, buyers in one room. An initiative by Navbharat Times." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="image" href="https://timesinternet.in/assets/images/logo-blue-new.png" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India MSME Dialogue: Atmanirbhar Udyam | Atmanirbhar Bharat</title>
+  <meta name="description"
+    content="A multi-state, multi-language platform uniting MSMEs to foster focused discussions, collaboration, and inclusive growth.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
 
-<!-- ====== TOP NAV ====== -->
-<header class="nav" id="nav">
-  <div class="nav__inner">
-    <a class="nav__brand" href="#top" aria-label="Times Internet">
-      <img src="https://timesinternet.in/assets/images/logo-blue-new.png" alt="Times Internet" width="140" height="30" />
+  <!-- ══ PRE-LOAD CURTAIN ══ -->
+  <div id="curtain" aria-hidden="true">
+    <div class="curtain-wordmark">
+      <span class="accent">Atmanirbhar Udyam</span> · Atmanirbhar Bharat
+    </div>
+    <div class="curtain-hindi">आत्मनिर्भर उद्यम · आत्मनिर्भर भारत</div>
+    <div class="curtain-bar"><div class="curtain-bar-fill"></div></div>
+  </div>
+
+  <!-- ══ CUSTOM CURSOR ══ -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <img src="https://timesinternet.in/assets/images/logo-blue-new.png" alt="Times Internet">
     </a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="#why">क्यों UP</a>
-      <a href="#tracks">Tracks</a>
-      <a href="#clusters">Clusters</a>
-      <a href="#partner">Partner</a>
-      <a href="#editions">Editions</a>
-    </nav>
-    <div class="nav__actions">
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">English</button>
-      <a class="btn btn--primary btn--sm" href="#apply">Apply कीजिए</a>
+    <a href="#contact" class="nav-cta">Register Now</a>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero">
+    <div class="hero-video-stack" aria-hidden="true">
+      <video class="active" muted loop playsinline preload="auto"
+        src="https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4"></video>
+      <video muted loop playsinline preload="metadata"
+        src="https://videos.pexels.com/video-files/3209178/3209178-hd_1280_720_25fps.mp4"></video>
+      <video muted loop playsinline preload="metadata"
+        src="https://videos.pexels.com/video-files/2873755/2873755-hd_1280_720_25fps.mp4"></video>
+      <video muted loop playsinline preload="metadata"
+        src="https://videos.pexels.com/video-files/854212/854212-sd_640_360_24fps.mp4"></video>
+      <video muted loop playsinline preload="metadata"
+        src="https://videos.pexels.com/video-files/854213/854213-sd_640_360_24fps.mp4"></video>
     </div>
-  </div>
-</header>
+    <div class="hero-veil"></div>
+    <div class="hero-leak"></div>
+    <div class="hero-grain"></div>
 
-<main id="top">
-
-  <!-- ====== HERO ====== -->
-  <section class="hero">
-    <div class="hero__bg" aria-hidden="true"></div>
-    <div class="container hero__layout">
-
-      <!-- LEFT: WHITE CARD -->
-      <div class="hero__card">
-        <div class="hero__card-top">
-          <span class="hero__hashtag">#AtmanirbharUdyam</span>
-        </div>
-
-        <div class="hero__branding">
-          <span class="hero__brand-line1">INDIA</span>
-          <span class="hero__brand-line2">MSME DIALOGUE</span>
-          <span class="hero__brand-sub">Atmanirbhar Udyam | Atmanirbhar Bharat</span>
-        </div>
-
-        <p class="hero__desc">
-          A multi-state, multi-language platform uniting MSMEs rooted in regional economies, cultures, and industrial clusters to foster focused discussions and inclusive growth.
-        </p>
-
-        <div class="hero__meta-pill">
-          <span class="dot"></span>
-          <strong>Inaugural Edition</strong>
-          <span class="sep">·</span>
-          Uttar Pradesh
-          <span class="sep">·</span>
-          2026
-        </div>
-
-        <div class="hero__formats">
-          <span>Conclave</span>
-          <span class="sep">·</span>
-          <span>Expo</span>
-          <span class="sep">·</span>
-          <span>Knowledge Sessions</span>
-          <span class="sep">·</span>
-          <span>Awards</span>
-        </div>
-
-        <div class="hero__ctas">
-          <a class="btn btn--primary btn--lg" href="#apply">Apply कीजिए</a>
-          <a class="btn btn--ghost btn--lg" href="#disqualify">क्या मैं qualify करता हूँ?</a>
-        </div>
-
-        <div class="hero__initiative">
-          <span class="hero__init-label">AN INITIATIVE BY</span>
-          <img src="https://static.langimg.com/thumb/119164302/navbharat-times.jpg?width=366&resizemode=4" alt="Navbharat Times" class="hero__init-nbt" />
-          <img src="assets/live.png" alt="Times Internet Languages Live" class="hero__init-live" />
+    <div class="hero-content">
+      <div class="hero-initiative">
+        <span class="hero-initiative-label">An Initiative By</span>
+        <div class="hero-initiative-logos">
+          <img class="nbt" src="https://static.langimg.com/thumb/119164302/navbharat-times.jpg?width=366&resizemode=4" alt="NavBharat Times">
+          <img src="./assets/live.png" alt="Times Internet Live">
         </div>
       </div>
 
-      <!-- RIGHT: VISUAL PANEL -->
-      <aside class="hero__visual" aria-label="Event at a glance">
-        <div class="hero__visual-inner">
-
-          <p class="hero__tagline">यह event<br>हर MSME के लिए<br><em>नहीं है।</em></p>
-
-          <ul class="hero__stats" role="list">
-            <li><span class="hero__stat-n">2</span><span class="hero__stat-v">Days</span></li>
-            <li><span class="hero__stat-n">700+</span><span class="hero__stat-v">Delegates</span></li>
-            <li><span class="hero__stat-n">60+</span><span class="hero__stat-v">Speakers</span></li>
-            <li><span class="hero__stat-n">16+</span><span class="hero__stat-v">Sessions</span></li>
-          </ul>
-
-          <div class="hero__map" aria-hidden="true">
-            <svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-              <path d="M40 80 L80 50 L130 40 L175 34 L220 44 L268 58 L298 95 L293 142 L252 182 L198 202 L148 212 L100 197 L58 176 L40 140 Z"
-                    fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-linejoin="round" />
-              <g filter="url(#glow)">
-                <circle cx="120" cy="132" r="6" fill="#FFF" opacity=".9"><title>Agra</title></circle>
-                <circle cx="157" cy="106" r="6" fill="#FFF" opacity=".9"><title>Kanpur</title></circle>
-                <circle cx="112" cy="107" r="6" fill="#FFF" opacity=".9"><title>Firozabad</title></circle>
-                <circle cx="94"  cy="80"  r="6" fill="#FFF" opacity=".9"><title>Moradabad</title></circle>
-                <circle cx="215" cy="136" r="6" fill="#FFF" opacity=".9"><title>Bhadohi</title></circle>
-                <circle cx="230" cy="148" r="6" fill="#FFF" opacity=".9"><title>Varanasi</title></circle>
-                <circle cx="172" cy="120" r="7" fill="#FFD580" opacity="1"><title>Lucknow</title></circle>
-              </g>
-              <g font-family="Inter, sans-serif" font-size="9.5" fill="rgba(255,255,255,.85)" font-weight="500">
-                <text x="128" y="147">Agra</text>
-                <text x="163" y="101">Kanpur</text>
-                <text x="55"  y="78">Moradabad</text>
-                <text x="220" y="128">Bhadohi</text>
-                <text x="235" y="162">Varanasi</text>
-                <text x="178" y="115">Lucknow</text>
-              </g>
-            </svg>
-          </div>
-
-          <p class="hero__visual-foot">
-            90 lakh+ enterprises &nbsp;·&nbsp; 22 districts &nbsp;·&nbsp; सिर्फ़ qualified MSMEs
-          </p>
-
-        </div>
-      </aside>
-
-    </div>
-  </section>
-
-  <!-- ====== TRUST STRIP ====== -->
-  <section class="trust">
-    <div class="container trust__inner">
-      <div class="trust__item"><span class="trust__k">90 lakh+</span><span class="trust__v">MSME units in UP</span></div>
-      <div class="trust__item"><span class="trust__k">1.7 Cr</span><span class="trust__v">approx jobs</span></div>
-      <div class="trust__item"><span class="trust__k">46%</span><span class="trust__v">share in state exports</span></div>
-      <div class="trust__item"><span class="trust__k">20 lakh+</span><span class="trust__v">women-led MSMEs</span></div>
-      <div class="trust__item"><span class="trust__k">~14%</span><span class="trust__v">of India's total MSME count</span></div>
-    </div>
-  </section>
-
-  <!-- ====== WHY UP ====== -->
-  <section class="section" id="why">
-    <div class="container section__grid">
-      <header class="section__head">
-        <span class="kicker">Why Uttar Pradesh, why now</span>
-        <h2 class="h1">Scale है। अब coordination चाहिए।</h2>
-      </header>
-      <div class="section__body prose">
-        <p>Uttar Pradesh sits at the centre of India's MSME engine: over <strong>90 lakh enterprises</strong> driving employment, exports, and district-level industrialisation through ODOP, digital single-window clearances, and targeted credit expansion.</p>
-        <p>Achieving a <strong>$1 trillion economy by 2030</strong> demands sharper collaboration between government, MSMEs, investors, and solution providers. This summit creates that focused UP platform, bringing decision-makers and enablers to one room to close execution gaps, accelerate innovation, and convert UP's MSME base into a globally competitive ecosystem.</p>
+      <div class="hero-meta">
+        <span class="inaugural-badge">Inaugural Edition</span>
+        <span class="location-chip">
+          <svg class="pin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Uttar Pradesh · MSME Conclave &amp; Awards
+        </span>
       </div>
-    </div>
-  </section>
 
-  <!-- ====== DISCUSSION TRACKS ====== -->
-  <section class="section section--mute" id="tracks">
-    <div class="container">
-      <header class="head-center">
-        <span class="kicker">Discussion Tracks</span>
-        <h2 class="h1">10 बातचीत, जिनसे आपका business बदलेगा।</h2>
-      </header>
-      <ol class="tracks">
-        <li><span class="tracks__n">01</span><h3>Policy Power for MSMEs</h3><p>Schemes that actually reach the cluster floor.</p></li>
-        <li><span class="tracks__n">02</span><h3>Women-Led Growth Revolution</h3><p>20 lakh+ women MSMEs of UP: capital, markets, voice.</p></li>
-        <li><span class="tracks__n">03</span><h3>Infrastructure for Transformation</h3><p>Industrial parks, power, logistics, last-mile.</p></li>
-        <li><span class="tracks__n">04</span><h3>Zero Defect, Zero Effect</h3><p>Quality and sustainability as competitive moats.</p></li>
-        <li><span class="tracks__n">05</span><h3>Skilling for Jobs &amp; Innovation</h3><p>ITIs, placement agencies, apprenticeship reality.</p></li>
-        <li><span class="tracks__n">06</span><h3>AI-Driven Competitive Edge</h3><p>What MSMEs can actually deploy in 90 days.</p></li>
-        <li><span class="tracks__n">07</span><h3>Frictionless Credit Access</h3><p>Bank-NBFC-fintech panel, live problem-solving.</p></li>
-        <li><span class="tracks__n">08</span><h3>Exports: Make in UP, for the World</h3><p>Buyers, freight, packaging, export-promotion.</p></li>
-        <li><span class="tracks__n">09</span><h3>Smart Compliance &amp; Tax</h3><p>GST, labour, MSME-1 decoded by on-ground CAs.</p></li>
-        <li><span class="tracks__n">10</span><h3>Tourism-Linked Trade</h3><p>Crafts, handlooms, hospitality: the cross-sell.</p></li>
-      </ol>
-    </div>
-  </section>
+      <h1 class="hero-h1">
+        <span class="line">
+          <span class="word" style="animation-delay: 0.2s">India</span>
+          <span class="word" style="animation-delay: 0.28s">MSME</span>
+          <span class="word" style="animation-delay: 0.36s">Dialogue</span>
+        </span>
+        <span class="sublime line">
+          <span class="word accent" style="animation-delay: 0.5s">Atmanirbhar&nbsp;Udyam</span>
+          <span class="word sep" style="animation-delay: 0.55s">|</span>
+          <span class="word gold" style="animation-delay: 0.6s">Atmanirbhar&nbsp;Bharat</span>
+        </span>
+      </h1>
 
-  <!-- ====== OUTCOMES ====== -->
-  <section class="section" id="outcomes">
-    <div class="container">
-      <header class="head-center">
-        <span class="kicker">Why MSMEs can't miss this</span>
-        <h2 class="h1">दो दिन में वो meeting कीजिए जो दो साल में नहीं हुई।</h2>
-      </header>
-      <div class="outcomes">
-        <article class="card">
-          <h3>Loan अटका है?</h3>
-          <p>Bank के regional head से सीधे बैठ कर बात कीजिए। एक hall, सारे lenders।</p>
-          <a class="link" href="#apply">इसके लिए slot चाहिए &rarr;</a>
-        </article>
-        <article class="card">
-          <h3>Buyer नहीं मिल रहा?</h3>
-          <p>Distributors और exporters scout कर रहे हैं। आपको दिखाना है, बस।</p>
-          <a class="link" href="#apply">इसके लिए slot चाहिए &rarr;</a>
-        </article>
-        <article class="card">
-          <h3>GST notice?</h3>
-          <p>On-ground CA panel: आपके papers, उनकी expertise, बिना fees।</p>
-          <a class="link" href="#apply">इसके लिए slot चाहिए &rarr;</a>
-        </article>
-        <article class="card">
-          <h3>Scheme समझ नहीं आ रही?</h3>
-          <p>DIC officer आपके सामने, बिना appointment, बिना file।</p>
-          <a class="link" href="#apply">इसके लिए slot चाहिए &rarr;</a>
-        </article>
-        <article class="card">
-          <h3>Brand नहीं बन रहा?</h3>
-          <p>Navbharat Times की team: case study की संभावना, on the record।</p>
-          <a class="link" href="#apply">इसके लिए slot चाहिए &rarr;</a>
-        </article>
-        <article class="card">
-          <h3>Skilled labour नहीं मिल रहा?</h3>
-          <p>ITIs और placement agencies, दोनों एक hall में, एक दिन में।</p>
-          <a class="link" href="#apply">इसके लिए slot चाहिए &rarr;</a>
-        </article>
-      </div>
-    </div>
-  </section>
+      <div class="hero-hindi">एमएसएमई कॉन्क्लेव एवं अवार्ड्स · आत्मनिर्भर भारत</div>
 
-  <!-- ====== DISQUALIFIER (REVERSE PSYCH) ====== -->
-  <section class="skip" id="disqualify">
-    <div class="container">
-      <span class="kicker kicker--inv">A small honesty</span>
-      <h2 class="h1 h1--inv">यह summit SKIP कर दीजिए, अगर...</h2>
-      <ul class="skip__list">
-        <li>आपका business पिछले 3 साल से वही है, और आप ख़ुश हैं।</li>
-        <li>आप मानते हैं कि सरकारी scheme सिर्फ़ "जुगाड़ वालों" के लिए हैं।</li>
-        <li>आपको GST, export, या credit की कोई दिक़्क़त कभी नहीं आई।</li>
-        <li>आप already Lucknow, Delhi, Mumbai के investors से directly बात कर रहे हैं।</li>
-      </ul>
-      <p class="skip__bottom">
-        अगर ऊपर का एक भी point आप पर लागू नहीं होता, <strong>तो नीचे apply कीजिए।</strong>
+      <p class="hero-sub">
+        A multi-state, multi-language platform uniting MSMEs — rooted in regional economies, cultures, and industrial
+        clusters — to foster focused discussions, collaboration, and inclusive growth for the backbone of India's
+        industrial economy.
       </p>
-      <a class="btn btn--primary btn--lg" href="#apply">मैं qualify करता हूँ &rarr;</a>
+
+      <div class="event-subtitle-block">
+        <span class="event-subtitle">MSME Conclave &amp; Awards</span>
+        <span class="event-subtitle-hindi">एमएसएमई कॉन्क्लेव एवं अवार्ड्स</span>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="#contact" class="hero-cta-btn">
+          <span>Register Now</span>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <div class="hero-scroll-prompt">
+          <span>Most pages tell you to register. Scroll first.</span>
+          <div class="hero-scroll-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-ticker" aria-hidden="true">
+      <div class="hero-ticker-track">
+        <span><span class="dot"></span>VARANASI · HANDLOOM &amp; SILK</span>
+        <span>KANPUR · LEATHER</span>
+        <span>MORADABAD · BRASSWARE</span>
+        <span>FIROZABAD · GLASSWARE</span>
+        <span>BHADOHI · CARPETS</span>
+        <span>AGRA · LEATHER &amp; CRAFT</span>
+        <span>LUCKNOW · CHIKANKARI</span>
+        <span>NOIDA · ELECTRONICS</span>
+        <span><span class="dot"></span>VARANASI · HANDLOOM &amp; SILK</span>
+        <span>KANPUR · LEATHER</span>
+        <span>MORADABAD · BRASSWARE</span>
+        <span>FIROZABAD · GLASSWARE</span>
+        <span>BHADOHI · CARPETS</span>
+        <span>AGRA · LEATHER &amp; CRAFT</span>
+        <span>LUCKNOW · CHIKANKARI</span>
+        <span>NOIDA · ELECTRONICS</span>
+      </div>
     </div>
   </section>
 
-  <!-- ====== REAL FEARS ====== -->
-  <section class="section">
+  <!-- ══ HERO STATS ══ -->
+  <section id="hero-stats">
     <div class="container">
-      <header class="head-center">
-        <span class="kicker">हम जानते हैं आप क्या सोच रहे हैं</span>
-        <h2 class="h1">तीन सवाल, जो हर MSME owner पूछता है।</h2>
-      </header>
-      <div class="fears">
-        <article class="fear">
-          <div class="fear__q">"Register करूँगा तो tax notice आ जाएगा?"</div>
-          <div class="fear__a"><strong>नहीं।</strong> यह event का registration है, न GST का, न income tax का। आपका Udyam number तक नहीं माँगा जाएगा। सिर्फ़ नाम, business, और phone।</div>
-        </article>
-        <article class="fear">
-          <div class="fear__q">"10 companies call करने लगेंगी।"</div>
-          <div class="fear__a">सिर्फ़ Navbharat Times की team call करेगी, सिर्फ़ event confirmation के लिए। Sponsors को आपका number तब तक नहीं जाएगा जब तक आप ख़ुद meeting book न करें।</div>
-        </article>
-        <article class="fear">
-          <div class="fear__q">"वहाँ सब बड़े लोग होंगे, मैं छोटा हूँ।"</div>
-          <div class="fear__a">700 में से <strong>500+ delegates आप जैसे ही हैं</strong>: Agra, Firozabad, Bhadohi, Kanpur, Moradabad से। Stage पर भी, और दर्शकों में भी।</div>
-        </article>
+      <div class="stats-bar">
+        <div class="stat-item reveal" style="--i: 1">
+          <span class="stat-num" data-count="2" data-suffix=" Days">0 Days</span>
+          <span class="stat-label">of Networking</span>
+        </div>
+        <div class="stat-item reveal" style="--i: 2">
+          <span class="stat-num" data-count="60" data-suffix="+">0+</span>
+          <span class="stat-label">Speakers</span>
+        </div>
+        <div class="stat-item reveal" style="--i: 3">
+          <span class="stat-num" data-count="700" data-suffix="+">0+</span>
+          <span class="stat-label">Delegates</span>
+        </div>
+        <div class="stat-item reveal" style="--i: 4">
+          <span class="stat-num" data-count="16" data-suffix="+">0+</span>
+          <span class="stat-label">Knowledge Sessions</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ====== CLUSTERS ====== -->
-  <section class="section section--mute" id="clusters">
+  <!-- ══ ABOUT ══ -->
+  <section id="about">
     <div class="container">
-      <header class="head-center">
-        <span class="kicker">आपके cluster से कौन आ रहा है</span>
-        <h2 class="h1">Aap akele nahi hain.</h2>
-      </header>
-      <div class="clusters">
-        <article class="cluster"><span class="cluster__n">40+</span><h3>Firozabad</h3><p>Glassware units confirmed</p></article>
-        <article class="cluster"><span class="cluster__n">25+</span><h3>Bhadohi</h3><p>Carpet exporters</p></article>
-        <article class="cluster"><span class="cluster__n">30+</span><h3>Moradabad</h3><p>Brassware MSMEs</p></article>
-        <article class="cluster"><span class="cluster__n">50+</span><h3>Agra</h3><p>Leather &amp; footwear units</p></article>
-        <article class="cluster"><span class="cluster__n">60+</span><h3>Kanpur</h3><p>Leather, textile, defence ancillary</p></article>
-        <article class="cluster"><span class="cluster__n">35+</span><h3>Varanasi</h3><p>Handloom &amp; silk</p></article>
-        <article class="cluster cluster--more"><span class="cluster__n">+22</span><h3>और districts</h3><p>Confirming every week</p></article>
+      <div class="section-header reveal">
+        <span class="section-tag">The Backdrop</span>
+        <h2 class="section-h2">Uttar Pradesh &amp; the <em>MSME Opportunity</em></h2>
+        <div class="section-divider"></div>
       </div>
-      <p class="clusters__note">700 में से <strong>463 seats</strong> बुक हो चुकी हैं। बाक़ी <strong>237</strong> हम manually approve कर रहे हैं, ताकि सही mix बने।</p>
-    </div>
-  </section>
-
-  <!-- ====== WHO SHOULD BE THERE ====== -->
-  <section class="section">
-    <div class="container section__grid">
-      <header class="section__head">
-        <span class="kicker">Who should be there</span>
-        <h2 class="h1">सही कमरा, सही लोग।</h2>
-      </header>
-      <div class="section__body">
-        <ul class="chips">
-          <li>Government officials &amp; policy implementers</li>
-          <li>MSME owners and CXOs</li>
-          <li>Women entrepreneurs</li>
-          <li>Banks, NBFCs, MFIs &amp; PE-VC funds</li>
-          <li>Technology &amp; SaaS providers</li>
-          <li>Trade bodies &amp; industry associations</li>
-          <li>Compliance &amp; advisory firms</li>
-          <li>Exporters and cluster players</li>
-          <li>Skill-training institutes &amp; placement agencies</li>
-          <li>Industry analysts &amp; sector influencers</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== PARTNER / EXHIBIT ====== -->
-  <section class="section section--ink" id="partner">
-    <div class="container twocol">
-      <div class="twocol__col">
-        <span class="kicker kicker--inv">Reasons to partner</span>
-        <h2 class="h1 h1--inv">Brand को trusted enabler बनाइए, vendor नहीं।</h2>
-        <ul class="bullets bullets--inv">
-          <li>Exclusive access to UP's fastest-growing MSME base</li>
-          <li>High-visibility branding at summit, expo, and awards</li>
-          <li>Lead generation from targeted clusters</li>
-          <li>Influence policy and scheme design</li>
-          <li>Content and thought-leadership amplification</li>
-        </ul>
-        <a class="btn btn--primary" href="#contact">Sponsor deck माँगिए</a>
-      </div>
-      <div class="twocol__col">
-        <span class="kicker kicker--inv">Who should exhibit</span>
-        <h3 class="h2 h1--inv">Put your brand in front of UP's high-potential MSMEs.</h3>
-        <ul class="bullets bullets--inv bullets--two">
-          <li>Technology: ERP, AI, IoT, analytics</li>
-          <li>Financial: Banks, NBFCs, fintechs, trade finance</li>
-          <li>GST &amp; compliance: CAs, tax-tech, advisory</li>
-          <li>Export &amp; logistics: freight, packaging, EPC</li>
-          <li>Skilling: training institutes, certification, placement</li>
-          <li>Industrial: DICs, associations, industrial parks</li>
-          <li>Marketing: digital, e-commerce, branding</li>
-          <li>Supply chain: raw material, machinery, MRO</li>
-        </ul>
+      <div class="about-grid">
+        <div class="about-text-col">
+          <p class="about-text reveal" style="--i: 1">
+            Uttar Pradesh sits at the centre of India's MSME engine, with over <strong>90 lakh enterprises</strong>
+            driving employment, exports, and district-level industrialisation through initiatives like ODOP, digital
+            single-window clearances, and targeted credit expansion. The state has built scale; the next challenge is
+            coordination — connecting policy intent with capital, technology, compliance, and market access to unlock
+            real growth.
+          </p>
+          <p class="about-text reveal" style="--i: 2">
+            Achieving a <strong>$1 trillion economy</strong> target by 2030 demands sharper collaboration between
+            government, MSMEs, investors, and solution providers across finance, technology, marketing, and regulatory
+            support. This summit creates that focused Uttar Pradesh platform — bringing decision-makers and enablers
+            together to address execution gaps, accelerate innovation, strengthen women-led enterprises, and convert
+            the state's MSME base into a high-growth, globally competitive ecosystem.
+          </p>
+          <div class="about-stat-tiles reveal" style="--i: 3">
+            <div class="about-stat-tile"><span class="n">90L+</span><span class="l">Enterprises</span></div>
+            <div class="about-stat-tile"><span class="n">1.7Cr</span><span class="l">Jobs</span></div>
+            <div class="about-stat-tile"><span class="n">46%</span><span class="l">Exports</span></div>
+          </div>
+        </div>
+        <div class="about-visual reveal-tilt" style="--i: 2">
+          <div class="about-map-wrap">
+            <div class="about-map-bg"></div>
+            <div class="about-map-bg-2"></div>
+            <div class="about-map-card">
+              <img class="about-map-img" src="./assets/up_map.png" alt="Uttar Pradesh map">
+              <div class="about-map-label">
+                <small>Inaugural Edition</small>
+                Uttar Pradesh
+              </div>
+              <span class="about-pin" style="top: 28%; left: 38%; --i: 1"></span>
+              <span class="about-pin" style="top: 42%; left: 52%; --i: 2"></span>
+              <span class="about-pin" style="top: 55%; left: 30%; --i: 3"></span>
+              <span class="about-pin" style="top: 62%; left: 60%; --i: 4"></span>
+              <span class="about-pin" style="top: 35%; left: 68%; --i: 5"></span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ====== UPCOMING EDITIONS ====== -->
-  <section class="section" id="editions">
+  <!-- ══ DISCUSSION TRACKS ══ -->
+  <section id="tracks">
+    <div class="tracks-intro">
+      <div class="section-header reveal">
+        <span class="section-tag">Agenda</span>
+        <h2 class="section-h2">Ten conversations <em>that move the needle</em></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">Scroll. Each track is a chapter of the conclave floor.</p>
+      </div>
+    </div>
+
+    <div class="tracks-pin">
+      <div class="tracks-sticky">
+        <div class="tracks-progress"><div class="tracks-progress-fill"></div></div>
+        <div class="tracks-counter"><strong>01</strong> &nbsp;/&nbsp; 10 Tracks</div>
+
+        <div class="tracks-rail">
+          <article class="track-card">
+            <div>
+              <span class="track-num">01 — Policy</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M4 17V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M8 21v-4"/><path d="M16 21v-4"/><path d="M12 21v-4"/><path d="M2 7h20"/><path d="M12 2 2 7h20Z"/></svg>
+              </div>
+              <h3 class="track-title">Policy Power for MSMEs</h3>
+              <p class="track-desc">From scheme to shop-floor — translating central intent into district reality.</p>
+            </div>
+            <span class="track-arrow">Decode the levers →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">02 — People</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3 class="track-title">Women-Led Growth Revolution</h3>
+              <p class="track-desc">UP's 20 lakh women MSMEs are not a footnote — they're the next chapter.</p>
+            </div>
+            <span class="track-arrow">Meet the founders →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">03 — Infra</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><path d="m3 21 3-3"/><path d="m15 21 3-3"/><path d="M12 21V9l-6 6"/><path d="m6 9 6 6"/><path d="m2 5 20-2"/><path d="m3 12 18-2"/><path d="m5 19 14-2"/><path d="m7 21 10-2"/></svg>
+              </div>
+              <h3 class="track-title">Infrastructure for Transformation</h3>
+              <p class="track-desc">Logistics, power, parks — the unglamorous rails of scale.</p>
+            </div>
+            <span class="track-arrow">Map the gaps →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">04 — Quality</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+              </div>
+              <h3 class="track-title">Zero Defect, Zero Effect</h3>
+              <p class="track-desc">Manufacturing that scales without leaving a footprint behind.</p>
+            </div>
+            <span class="track-arrow">Earn the badge →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">05 — Skills</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <h3 class="track-title">Skilling for Job Creation</h3>
+              <p class="track-desc">Closing the gap between training certificates and shop-floor capability.</p>
+            </div>
+            <span class="track-arrow">Build the pipeline →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">06 — AI</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/><path d="M8 10v.01"/><path d="M16 10v.01"/></svg>
+              </div>
+              <h3 class="track-title">AI-Driven Competitive Edge</h3>
+              <p class="track-desc">Not the demo. The deployment. AI on the shop floor, not the slide deck.</p>
+            </div>
+            <span class="track-arrow">Ship something →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">07 — Capital</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              </div>
+              <h3 class="track-title">Frictionless Credit Access</h3>
+              <p class="track-desc">Get capital flowing without the runaround — banks, NBFCs, fintech, in one room.</p>
+            </div>
+            <span class="track-arrow">Find the cheque →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">08 — Exports</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              </div>
+              <h3 class="track-title">Make in UP, For the World</h3>
+              <p class="track-desc">From Bhadohi to Berlin. The next 1000 exporters start here.</p>
+            </div>
+            <span class="track-arrow">Cross the border →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">09 — Compliance</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+              </div>
+              <h3 class="track-title">Smart Compliance &amp; Tax</h3>
+              <p class="track-desc">GST, labour, returns — decoded by people who file them daily, not by Twitter.</p>
+            </div>
+            <span class="track-arrow">Cut the paperwork →</span>
+          </article>
+
+          <article class="track-card">
+            <div>
+              <span class="track-num">10 — Tourism</span>
+              <div class="track-icon-wrap">
+                <svg class="lucide-icon" viewBox="0 0 24 24"><path d="M9 21H3v-6"/><path d="M21 3h-6"/><path d="M21 3L3 21"/></svg>
+              </div>
+              <h3 class="track-title">Tourism-Linked Trade Boost</h3>
+              <p class="track-desc">Varanasi, Ayodhya, Agra — pilgrim and traveller traffic, converted into MSME demand.</p>
+            </div>
+            <span class="track-arrow">Catch the footfall →</span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHY — reverse psychology ══ -->
+  <section id="why">
     <div class="container">
-      <header class="head-center">
-        <span class="kicker">Upcoming Editions</span>
-        <h2 class="h1">पाँच states. पाँच भाषाएँ. एक dialogue.</h2>
-      </header>
-      <div class="editions">
-        <article class="edition">
-          <div class="edition__state">Karnataka</div>
-          <div class="edition__lang">MSME Conclave &amp; Awards <span lang="kn">· ಕನ್ನಡ</span></div>
-          <a class="link" href="#contact">Express Interest &rarr;</a>
-        </article>
-        <article class="edition">
-          <div class="edition__state">Maharashtra</div>
-          <div class="edition__lang">MSME Conclave &amp; Awards <span lang="mr">· मराठी</span></div>
-          <a class="link" href="#contact">Express Interest &rarr;</a>
-        </article>
-        <article class="edition">
-          <div class="edition__state">West Bengal</div>
-          <div class="edition__lang">MSME Conclave &amp; Awards <span lang="bn">· বাংলা</span></div>
-          <a class="link" href="#contact">Express Interest &rarr;</a>
-        </article>
-        <article class="edition">
-          <div class="edition__state">Gujarat</div>
-          <div class="edition__lang">MSME Conclave &amp; Awards <span lang="gu">· ગુજરાતી</span></div>
-          <a class="link" href="#contact">Express Interest &rarr;</a>
-        </article>
+      <div class="section-header reveal">
+        <span class="section-tag">Honestly though</span>
+        <h2 class="section-h2 why-header">Skip this <em>if you're already winning.</em></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">For everyone else, here are six reasons to clear your calendar. Hover any card.</p>
+        <div class="why-warning">
+          <span class="strike">Another networking event.</span> &nbsp; This one converts.
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ====== APPLY ====== -->
-  <section class="section section--apply" id="apply">
-    <div class="container apply">
-      <header class="apply__head">
-        <span class="kicker">Apply for a seat</span>
-        <h2 class="h1">90 seconds. 6 fields. कोई tax नहीं, कोई spam नहीं।</h2>
-        <p class="apply__sub">463 seats बुक हो चुकी हैं &nbsp;·&nbsp; 237 बच गई हैं &nbsp;·&nbsp; आप अगले 48 घंटे में जवाब पाएँगे।</p>
-      </header>
-
-      <form class="form" id="applyForm" novalidate>
-        <div class="field">
-          <label for="f-name">आपका नाम (जैसे visiting card पर है)</label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required />
-          <small class="hint"></small>
-        </div>
-        <div class="field">
-          <label for="f-biz">Business / दुकान / factory का नाम</label>
-          <input id="f-biz" name="business" type="text" autocomplete="organization" required />
-          <small class="hint"></small>
-        </div>
-        <div class="field">
-          <label for="f-role">आप क्या करते हैं?</label>
-          <select id="f-role" name="role" required>
-            <option value="">चुनिए...</option>
-            <option>Owner</option>
-            <option>Partner</option>
-            <option>Manager</option>
-            <option>Family / Successor</option>
-            <option>Other</option>
-          </select>
-          <small class="hint"></small>
-        </div>
-        <div class="field">
-          <label for="f-city">कहाँ से (District + State)</label>
-          <input id="f-city" name="city" type="text" placeholder="जैसे: Firozabad, UP" required />
-          <small class="hint"></small>
-        </div>
-        <div class="field field--full">
-          <label for="f-sector">क्या बनाते / बेचते हैं? <span class="muted">(एक line में)</span></label>
-          <input id="f-sector" name="sector" type="text" required />
-          <small class="hint"></small>
-        </div>
-        <div class="field">
-          <label for="f-turn">साल का लगभग turnover <span class="muted">(optional)</span></label>
-          <select id="f-turn" name="turnover">
-            <option value="">बताना नहीं चाहते, कोई बात नहीं</option>
-            <option>&lt; ₹50 लाख</option>
-            <option>₹50 लाख – ₹2 करोड़</option>
-            <option>₹2 – ₹10 करोड़</option>
-            <option>₹10 – ₹50 करोड़</option>
-            <option>₹50 करोड़+</option>
-          </select>
-          <small class="hint"></small>
-        </div>
-        <div class="field">
-          <label for="f-wa">WhatsApp number</label>
-          <div class="input-wrap">
-            <span class="input-prefix" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#25D366" d="M19.11 17.31c-.27.78-1.58 1.5-2.2 1.56-.56.06-1.26.08-2.04-.13-.47-.13-1.08-.33-1.86-.66-3.27-1.41-5.4-4.7-5.56-4.92-.16-.22-1.32-1.76-1.32-3.36 0-1.6.84-2.38 1.14-2.71.3-.33.65-.41.87-.41.22 0 .43 0 .62.01.2.01.47-.08.73.56.27.66.92 2.26 1 2.42.08.16.13.35.03.57-.1.22-.15.35-.3.55-.16.2-.33.44-.47.59-.16.16-.32.34-.14.65.18.31.79 1.31 1.7 2.12 1.17 1.05 2.16 1.37 2.47 1.53.31.16.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.71-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.75-.19 1.53z"/></svg>
-            </span>
-            <input id="f-wa" name="whatsapp" type="tel" inputmode="numeric" pattern="[0-9 +\-]{10,15}" autocomplete="tel" required placeholder="10-digit mobile" />
+      <div class="why-grid">
+        <div class="why-card reveal" style="--i: 1">
+          <div class="why-card-inner">
+            <div class="why-face why-face-front">
+            <div class="why-icon-wrap"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3-6 6"/></svg></div>
+            <h3 class="why-title">Market Linkages</h3>
+            <p class="why-desc">Same room as investors, distributors, and service providers actively scouting local MSMEs.</p>
           </div>
-          <small class="hint">सिर्फ़ NBT team call करेगी। Promise।</small>
+            <div class="why-face why-face-back">
+            <div class="why-back-label">You walk away with</div>
+            <div class="why-back-text">A shortlist of buyers you can call by Friday.</div>
+          </div>
         </div>
-        <div class="field">
-          <label for="f-email">Email <span class="muted">(अगर है तो, WhatsApp काफ़ी है)</span></label>
-          <input id="f-email" name="email" type="email" autocomplete="email" />
-          <small class="hint"></small>
         </div>
 
-        <div class="field field--full form__submit">
-          <button type="submit" class="btn btn--primary btn--lg">Apply कर दीजिए &rarr;</button>
-          <span class="form__legal">हम आपकी details सिर्फ़ event coordination के लिए use करेंगे।</span>
+        <div class="why-card reveal" style="--i: 2">
+          <div class="why-card-inner">
+            <div class="why-face why-face-front">
+            <div class="why-icon-wrap"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
+            <h3 class="why-title">Regulatory Guidance</h3>
+            <p class="why-desc">On-ground experts decoding GST, labour, and compliance — for your business, not a textbook.</p>
+          </div>
+            <div class="why-face why-face-back">
+            <div class="why-back-label">You walk away with</div>
+            <div class="why-back-text">Specific answers to your specific filings.</div>
+          </div>
         </div>
-      </form>
+        </div>
 
-      <div class="form__success" id="formSuccess" hidden role="status" aria-live="polite">
-        <h3>धन्यवाद, <span id="successName">ji</span>।</h3>
-        <p>आपकी application हमारी team के पास पहुँच गई है।</p>
-        <p>अगले <strong>48 घंटे</strong> में आपको <strong>Pawan Kumar (+91 9311506910)</strong> WhatsApp करेंगे।</p>
-        <p class="muted">Tab tak, नीचे देखिए कौन-कौन से Firozabad / Bhadohi / Agra units already आ रहे हैं &uarr;</p>
+        <div class="why-card reveal" style="--i: 3">
+          <div class="why-card-inner">
+            <div class="why-face why-face-front">
+            <div class="why-icon-wrap"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+            <h3 class="why-title">Brand Visibility</h3>
+            <p class="why-desc">Visibility in front of policymakers, media, industry leaders. Turn your MSME into a case study.</p>
+          </div>
+            <div class="why-face why-face-back">
+            <div class="why-back-label">You walk away with</div>
+            <div class="why-back-text">Press coverage and a story worth telling.</div>
+          </div>
+        </div>
+        </div>
+
+        <div class="why-card reveal" style="--i: 4">
+          <div class="why-card-inner">
+            <div class="why-face why-face-front">
+            <div class="why-icon-wrap"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
+            <h3 class="why-title">Practical Learning</h3>
+            <p class="why-desc">Success stories and failure post-mortems from peers — what actually scales, not generic theory.</p>
+          </div>
+            <div class="why-face why-face-back">
+            <div class="why-back-label">You walk away with</div>
+            <div class="why-back-text">Three mistakes you no longer have to make.</div>
+          </div>
+        </div>
+        </div>
+
+        <div class="why-card reveal" style="--i: 5">
+          <div class="why-card-inner">
+            <div class="why-face why-face-front">
+            <div class="why-icon-wrap"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M4 17V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M2 7h20"/><path d="M12 2 2 7h20Z"/></svg></div>
+            <h3 class="why-title">Industry Representation</h3>
+            <p class="why-desc">Engage directly with government officials and trade bodies — voice your bottlenecks where it counts.</p>
+          </div>
+            <div class="why-face why-face-back">
+            <div class="why-back-label">You walk away with</div>
+            <div class="why-back-text">Your name on the next policy round-table.</div>
+          </div>
+        </div>
+        </div>
+
+        <div class="why-card reveal" style="--i: 6">
+          <div class="why-card-inner">
+            <div class="why-face why-face-front">
+            <div class="why-icon-wrap"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+            <h3 class="why-title">Strategic Alliances</h3>
+            <p class="why-desc">Vet and lock partnerships in two days, not two quarters. Cut the discovery loop.</p>
+          </div>
+            <div class="why-face why-face-back">
+            <div class="why-back-label">You walk away with</div>
+            <div class="why-back-text">A signed MoU. Or the courage to walk.</div>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ====== CONTACT ====== -->
-  <section class="section section--mute" id="contact">
+  <!-- ══ WHO — constellation ══ -->
+  <section id="who">
     <div class="container">
-      <header class="head-center">
-        <span class="kicker">Contact us</span>
-        <h2 class="h1">सीधे इंसान से बात कीजिए। Form वैकल्पिक है।</h2>
-      </header>
-      <div class="contacts">
-        <article class="contact">
-          <span class="contact__role">Delegates &amp; Partnership</span>
-          <h3>Pawan Kumar</h3>
-          <a href="mailto:pawan.kumar3@timesinternet.in">pawan.kumar3@timesinternet.in</a>
-          <div class="contact__actions">
-            <a class="btn btn--secondary btn--sm" href="tel:+919311506910">+91 93115 06910</a>
-            <a class="btn btn--whatsapp btn--sm" href="https://wa.me/919311506910" target="_blank" rel="noopener">WhatsApp</a>
+      <div class="section-header reveal">
+        <span class="section-tag">The Room</span>
+        <h2 class="section-h2">Who's <em>in the room</em></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">Ten orbits around a single conversation. Hover any.</p>
+      </div>
+
+      <div class="constellation reveal">
+        <svg class="constellation-svg" preserveAspectRatio="none"></svg>
+        <div class="constellation-core"><span>MSME</span></div>
+        <span class="who-tag">Government &amp; Policy</span>
+        <span class="who-tag">MSME Owners &amp; CXOs</span>
+        <span class="who-tag">Women Entrepreneurs</span>
+        <span class="who-tag">Banks, NBFCs, MFIs</span>
+        <span class="who-tag">PE &amp; VC Funds</span>
+        <span class="who-tag">Tech &amp; SaaS</span>
+        <span class="who-tag">Trade Bodies</span>
+        <span class="who-tag">Compliance Advisors</span>
+        <span class="who-tag">Exporters &amp; Clusters</span>
+        <span class="who-tag">Skill Institutes</span>
+        <span class="who-tag">Industry Analysts</span>
+        <span class="who-tag">Sector Influencers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PARTNER ══ -->
+  <section id="partner">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Partnerships</span>
+        <h2 class="section-h2">Reasons to <em>partner with us</em></h2>
+        <div class="section-divider"></div>
+      </div>
+
+      <div class="partner-grid">
+        <aside class="partner-cta-card reveal" style="--i: 1">
+          <div class="partner-cta-eyebrow">For Partners</div>
+          <h3 class="partner-cta-h3">Don't sponsor an event. <em>Anchor a movement.</em></h3>
+          <p class="partner-cta-p">90 lakh MSMEs. One inaugural edition. A four-state pan-India roadmap after this. Pick your slot before the room fills.</p>
+          <a href="mailto:gaurav.vats@timesinternet.in" class="partner-cta-btn">
+            Become a Partner
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </aside>
+
+        <div class="partner-marquee reveal" style="--i: 2">
+          <div class="partner-marquee-track">
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 3.82-13.82L13 2.5a2.53 2.53 0 0 1 3.55 0l2 2a2.53 2.53 0 0 1 0 3.55l-.68.68A22 22 0 0 1 4 15.18M15 9l-6 6"/></svg></span>
+              <span class="partner-reason-text">Exclusive access to UP's fastest-growing MSME base — direct, qualified, in-room.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/></svg></span>
+              <span class="partner-reason-text">High-visibility branding at summit, expo floor, and awards night.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+              <span class="partner-reason-text">Lead generation from targeted clusters — leather, glass, brass, handloom, electronics.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></span>
+              <span class="partner-reason-text">Position as a trusted enabler. Not just another vendor in the inbox.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M4 17V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/><path d="M12 2 2 7h20Z"/></svg></span>
+              <span class="partner-reason-text">Influence policy and scheme design — be in the room where it's drafted.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+              <span class="partner-reason-text">Content and thought-leadership amplification across NBT and Times Internet network.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+
+            <!-- duplicate for seamless loop -->
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/></svg></span>
+              <span class="partner-reason-text">Exclusive access to UP's fastest-growing MSME base — direct, qualified, in-room.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/></svg></span>
+              <span class="partner-reason-text">High-visibility branding at summit, expo floor, and awards night.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/></svg></span>
+              <span class="partner-reason-text">Lead generation from targeted clusters — leather, glass, brass, handloom, electronics.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/></svg></span>
+              <span class="partner-reason-text">Position as a trusted enabler. Not just another vendor in the inbox.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M3 21h18"/></svg></span>
+              <span class="partner-reason-text">Influence policy and scheme design — be in the room where it's drafted.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
+            <div class="partner-reason">
+              <span class="partner-reason-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg></span>
+              <span class="partner-reason-text">Content and thought-leadership amplification across NBT and Times Internet network.</span>
+              <span class="partner-reason-arrow">→</span>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ EXHIBIT — bento ══ -->
+  <section id="exhibit">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Exhibition</span>
+        <h2 class="section-h2">Who should <em>exhibit</em></h2>
+        <div class="section-divider"></div>
+      </div>
+      <p class="exhibit-lead reveal" style="--i: 1">
+        Put your brand directly in front of hundreds of UP's high-potential MSMEs, promoters, government bodies, and industry leaders — and convert presence into measurable leads through live demos and one-on-one meetings.
+      </p>
+
+      <div class="exhibit-bento">
+        <div class="exhibit-card large reveal" style="--i: 1">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">Technology</div>
+            <div class="exhibit-card-sub">ERP, AI, IoT, data analytics — the platforms quietly running modern MSMEs.</div>
+          </div>
+        </div>
+        <div class="exhibit-card reveal" style="--i: 2">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">Financial Services</div>
+            <div class="exhibit-card-sub">Banks · NBFCs · Fintechs · Trade finance.</div>
+          </div>
+        </div>
+        <div class="exhibit-card reveal" style="--i: 3">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">GST &amp; Compliance</div>
+            <div class="exhibit-card-sub">CAs · Tax-tech · Return filing · Advisory.</div>
+          </div>
+        </div>
+        <div class="exhibit-card wide reveal" style="--i: 4">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">Export &amp; Logistics</div>
+            <div class="exhibit-card-sub">Freight forwarders, packaging, export-promotion agencies — the chain that ships UP-made to the world.</div>
+          </div>
+        </div>
+        <div class="exhibit-card reveal" style="--i: 5">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">Skill Training</div>
+            <div class="exhibit-card-sub">Institutes · Certifications · Placement.</div>
+          </div>
+        </div>
+        <div class="exhibit-card reveal" style="--i: 6">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M4 17V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">Industrial Development</div>
+            <div class="exhibit-card-sub">DICs · MSME associations · Industrial parks.</div>
+          </div>
+        </div>
+        <div class="exhibit-card reveal" style="--i: 7">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">Marketing</div>
+            <div class="exhibit-card-sub">Digital marketing · E-commerce enablers · Branding.</div>
+          </div>
+        </div>
+        <div class="exhibit-card reveal" style="--i: 8">
+          <div class="exhibit-card-icon"><svg class="lucide-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/></svg></div>
+          <div>
+            <div class="exhibit-card-title">Supply Chain</div>
+            <div class="exhibit-card-sub">Raw materials · Machinery · Maintenance services.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATS — the floor ══ -->
+  <section id="stats">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">By the Numbers</span>
+        <h2 class="section-h2">MSMEs in <em>Uttar Pradesh</em></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">The numbers that make this the inaugural state.</p>
+      </div>
+
+      <div class="big-stats-grid">
+        <div class="big-stat reveal" style="--i: 1">
+          <div class="big-num"><span data-count="90" data-suffix=" L+">0 L+</span></div>
+          <div class="big-stat-label">Units</div>
+        </div>
+        <div class="big-stat reveal" style="--i: 2">
+          <div class="big-num"><span data-count="14" data-suffix="%" data-prefix="~">~0%</span></div>
+          <div class="big-stat-label">Share in India's total MSME count</div>
+        </div>
+        <div class="big-stat reveal" style="--i: 3">
+          <div class="big-num"><span data-count="1.7" data-decimals="1" data-suffix=" Cr">0 Cr</span></div>
+          <div class="big-stat-label">Approximate jobs</div>
+        </div>
+        <div class="big-stat reveal" style="--i: 4">
+          <div class="big-num"><span data-count="46" data-suffix="%+">0%+</span></div>
+          <div class="big-stat-label">Share in exports</div>
+        </div>
+        <div class="big-stat reveal" style="--i: 5">
+          <div class="big-num"><span data-count="20" data-suffix=" L+">0 L+</span></div>
+          <div class="big-stat-label">Women-led MSMEs</div>
+        </div>
+      </div>
+
+      <div class="clusters-block reveal" style="--i: 2">
+        <div class="clusters-label">Key Clusters · Tap to explore</div>
+        <div class="cluster-chips">
+          <details class="cluster-chip"><summary>Agra &amp; Kanpur — Leather</summary><div class="desc">India's leather capital. From premium footwear to global handbag brands sourcing here for decades.</div></details>
+          <details class="cluster-chip"><summary>Firozabad — Glassware</summary><div class="desc">The bangle and decorative-glass cluster — over 400 units, exports to 50+ countries.</div></details>
+          <details class="cluster-chip"><summary>Moradabad — Brassware</summary><div class="desc">"Brass City of India." Skilled metal-craft hub, ~10,000 export units.</div></details>
+          <details class="cluster-chip"><summary>Bhadohi — Carpets</summary><div class="desc">Carpet weaving cluster supplying 70% of India's carpet exports.</div></details>
+          <details class="cluster-chip"><summary>Varanasi — Handloom &amp; Silk</summary><div class="desc">Banarasi silk — GI-tagged, woven by ~125,000 artisans across the cluster.</div></details>
+          <details class="cluster-chip"><summary>Lucknow — Chikankari</summary><div class="desc">India's signature embroidery cluster — predominantly women-led, exports rising.</div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ UPCOMING ══ -->
+  <section id="upcoming">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Pan-India</span>
+        <h2 class="section-h2">Upcoming <em>editions</em></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">Four states. Four languages. One dialogue.</p>
+      </div>
+
+      <div class="editions-grid">
+        <article class="edition-card reveal" style="--i: 1" data-state="karnataka">
+          <div class="edition-state">Karnataka</div>
+          <div class="edition-script">ಕನ್ನಡ</div>
+          <div class="edition-sub-wrap">
+            <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
+            <div class="edition-sub flip-reg">ಎಂಎಸ್ಎಂಇ ಕಾನ್ಕ್ಲೇವ್</div>
+          </div>
+          <a href="mailto:pawan.kumar3@timesinternet.in?subject=Karnataka Edition" class="btn-outline">Express Interest →</a>
         </article>
-        <article class="contact">
-          <span class="contact__role">Award Nominations</span>
-          <h3>Sagun Kumari</h3>
-          <a href="mailto:sagun.kumari@timesinternet.in">sagun.kumari@timesinternet.in</a>
-          <div class="contact__actions">
-            <a class="btn btn--secondary btn--sm" href="tel:+919304412377">+91 93044 12377</a>
-            <a class="btn btn--whatsapp btn--sm" href="https://wa.me/919304412377" target="_blank" rel="noopener">WhatsApp</a>
+
+        <article class="edition-card reveal" style="--i: 2" data-state="maharashtra">
+          <div class="edition-state">Maharashtra</div>
+          <div class="edition-script">मराठी</div>
+          <div class="edition-sub-wrap">
+            <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
+            <div class="edition-sub flip-reg">एमएसएमई कॉन्क्लेव्ह</div>
           </div>
+          <a href="mailto:pawan.kumar3@timesinternet.in?subject=Maharashtra Edition" class="btn-outline">Express Interest →</a>
         </article>
-        <article class="contact">
-          <span class="contact__role">Speaking Opportunity</span>
-          <h3>Simran Singh</h3>
-          <a href="mailto:simran1@timesinternet.in">simran1@timesinternet.in</a>
-          <div class="contact__actions">
-            <a class="btn btn--secondary btn--sm" href="tel:+917838788554">+91 78387 88554</a>
-            <a class="btn btn--whatsapp btn--sm" href="https://wa.me/917838788554" target="_blank" rel="noopener">WhatsApp</a>
+
+        <article class="edition-card reveal" style="--i: 3" data-state="wb">
+          <div class="edition-state">West Bengal</div>
+          <div class="edition-script">বাংলা</div>
+          <div class="edition-sub-wrap">
+            <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
+            <div class="edition-sub flip-reg">এমএসএমই কনক্লেভ</div>
           </div>
+          <a href="mailto:pawan.kumar3@timesinternet.in?subject=West Bengal Edition" class="btn-outline">Express Interest →</a>
         </article>
-        <article class="contact">
-          <span class="contact__role">Sponsorships</span>
-          <h3>Gaurav Vats</h3>
-          <a href="mailto:gaurav.vats@timesinternet.in">gaurav.vats@timesinternet.in</a>
-          <div class="contact__actions">
-            <a class="btn btn--secondary btn--sm" href="tel:+919811573962">+91 98115 73962</a>
-            <a class="btn btn--whatsapp btn--sm" href="https://wa.me/919811573962" target="_blank" rel="noopener">WhatsApp</a>
+
+        <article class="edition-card reveal" style="--i: 4" data-state="gujarat">
+          <div class="edition-state">Gujarat</div>
+          <div class="edition-script">ગુજરાતી</div>
+          <div class="edition-sub-wrap">
+            <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
+            <div class="edition-sub flip-reg">એમએસએમઇ કોન્ક્લેવ</div>
           </div>
+          <a href="mailto:pawan.kumar3@timesinternet.in?subject=Gujarat Edition" class="btn-outline">Express Interest →</a>
         </article>
       </div>
     </div>
   </section>
 
-</main>
+  <!-- ══ CONTACT ══ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Contact</span>
+        <h2 class="section-h2">Talk to <em>a human</em></h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">Four people. Real phone numbers. Whichever fits your ask.</p>
+      </div>
 
-<!-- ====== FOOTER ====== -->
-<footer class="footer">
-  <div class="container footer__inner">
-    <div class="footer__left">
-      <img src="https://timesinternet.in/assets/images/logo-blue-new.png" alt="Times Internet" width="140" height="30" />
-      <p class="footer__line">An Initiative By Navbharat Times</p>
-      <p class="footer__legal">&copy; Times Internet Limited. All event details indicative; final lineup may evolve.</p>
+      <div class="contact-grid">
+        <div class="contact-card reveal" style="--i: 1">
+          <div class="contact-role">Delegates &amp; Partnership</div>
+          <div class="contact-avatar" style="background: linear-gradient(135deg, #FF6B1A, #C8963E)">PK</div>
+          <div class="contact-name">Pawan Kumar</div>
+          <div class="contact-links">
+            <a href="mailto:pawan.kumar3@timesinternet.in" class="contact-link"><span class="contact-link-icon">✉</span>pawan.kumar3@timesinternet.in</a>
+            <a href="tel:+919311506910" class="contact-link"><span class="contact-link-icon">☎</span>+91 93115 06910</a>
+          </div>
+        </div>
+
+        <div class="contact-card reveal" style="--i: 2">
+          <div class="contact-role">Award Nominations</div>
+          <div class="contact-avatar" style="background: linear-gradient(135deg, #0D1B3E, #1A2F5E)">SK</div>
+          <div class="contact-name">Sagun Kumari</div>
+          <div class="contact-links">
+            <a href="mailto:sagun.kumari@timesinternet.in" class="contact-link"><span class="contact-link-icon">✉</span>sagun.kumari@timesinternet.in</a>
+            <a href="tel:+919304412377" class="contact-link"><span class="contact-link-icon">☎</span>+91 93044 12377</a>
+          </div>
+        </div>
+
+        <div class="contact-card reveal" style="--i: 3">
+          <div class="contact-role">Speaking Opportunity</div>
+          <div class="contact-avatar" style="background: linear-gradient(135deg, #C8963E, #E0B060)">SS</div>
+          <div class="contact-name">Simran Singh</div>
+          <div class="contact-links">
+            <a href="mailto:simran1@timesinternet.in" class="contact-link"><span class="contact-link-icon">✉</span>simran1@timesinternet.in</a>
+            <a href="tel:+917838788554" class="contact-link"><span class="contact-link-icon">☎</span>+91 78387 88554</a>
+          </div>
+        </div>
+
+        <div class="contact-card reveal" style="--i: 4">
+          <div class="contact-role">Sponsorships</div>
+          <div class="contact-avatar" style="background: linear-gradient(135deg, #FF6B1A, #0D1B3E)">GV</div>
+          <div class="contact-name">Gaurav Vats</div>
+          <div class="contact-links">
+            <a href="mailto:gaurav.vats@timesinternet.in" class="contact-link"><span class="contact-link-icon">✉</span>gaurav.vats@timesinternet.in</a>
+            <a href="tel:+919811573962" class="contact-link"><span class="contact-link-icon">☎</span>+91 98115 73962</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <nav class="footer__nav" aria-label="Footer">
-      <a href="#why">Why UP</a>
-      <a href="#tracks">Tracks</a>
-      <a href="#clusters">Clusters</a>
-      <a href="#apply">Apply</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</footer>
+  </section>
 
-<!-- ====== STICKY MOBILE BAR ====== -->
-<div class="sticky-cta">
-  <a class="btn btn--primary btn--block" href="#apply">Apply कीजिए</a>
-  <a class="btn btn--whatsapp btn--block" href="https://wa.me/919311506910?text=Namaste%2C%20NBT%20MSME%20Conclave%20ke%20baare%20mein%20jaanna%20hai." target="_blank" rel="noopener" aria-label="WhatsApp Pawan">
-    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M19.11 17.31c-.27.78-1.58 1.5-2.2 1.56-.56.06-1.26.08-2.04-.13-.47-.13-1.08-.33-1.86-.66-3.27-1.41-5.4-4.7-5.56-4.92-.16-.22-1.32-1.76-1.32-3.36 0-1.6.84-2.38 1.14-2.71.3-.33.65-.41.87-.41.22 0 .43 0 .62.01.2.01.47-.08.73.56.27.66.92 2.26 1 2.42.08.16.13.35.03.57-.1.22-.15.35-.3.55-.16.2-.33.44-.47.59-.16.16-.32.34-.14.65.18.31.79 1.31 1.7 2.12 1.17 1.05 2.16 1.37 2.47 1.53.31.16.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.71-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.75-.19 1.53zM12.04 2C6.51 2 2 6.51 2 12.04c0 1.76.46 3.49 1.34 5L2 22l5.1-1.34A10.04 10.04 0 0 0 22 12.04C22 6.51 17.5 2 12.04 2z"/></svg>
-    WhatsApp
-  </a>
-</div>
+  <!-- ══ FINAL CTA ══ -->
+  <section id="final-cta">
+    <div class="final-cta-wrap">
+      <div class="final-cta-eyebrow">The Last Word</div>
+      <h2 class="final-cta-h2">The conclave begins <em>when you do.</em></h2>
+      <div class="final-cta-hindi">मंच तैयार है। आप कब आ रहे हैं?</div>
+      <p class="final-cta-sub">Not for spectators. For people who want UP's next chapter to have their name in it.</p>
+      <a href="mailto:pawan.kumar3@timesinternet.in?subject=Register: India MSME Dialogue UP" class="final-cta-btn">
+        Reserve My Seat
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
 
-<!-- ====== WHATSAPP FAB (desktop) ====== -->
-<a class="fab" href="https://wa.me/919311506910?text=Namaste%2C%20NBT%20MSME%20Conclave%20ke%20baare%20mein%20jaanna%20hai." target="_blank" rel="noopener" aria-label="Chat with Pawan on WhatsApp">
-  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M19.11 17.31c-.27.78-1.58 1.5-2.2 1.56-.56.06-1.26.08-2.04-.13-.47-.13-1.08-.33-1.86-.66-3.27-1.41-5.4-4.7-5.56-4.92-.16-.22-1.32-1.76-1.32-3.36 0-1.6.84-2.38 1.14-2.71.3-.33.65-.41.87-.41.22 0 .43 0 .62.01.2.01.47-.08.73.56.27.66.92 2.26 1 2.42.08.16.13.35.03.57-.1.22-.15.35-.3.55-.16.2-.33.44-.47.59-.16.16-.32.34-.14.65.18.31.79 1.31 1.7 2.12 1.17 1.05 2.16 1.37 2.47 1.53.31.16.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.71-.16.29.11 1.86.88 2.18 1.04.32.16.53.24.61.37.08.13.08.75-.19 1.53zM12.04 2C6.51 2 2 6.51 2 12.04c0 1.76.46 3.49 1.34 5L2 22l5.1-1.34A10.04 10.04 0 0 0 22 12.04C22 6.51 17.5 2 12.04 2z"/></svg>
-  <span class="fab__label">Pawan से बात कीजिए</span>
-</a>
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <img src="https://timesinternet.in/assets/images/logo-blue-new.png" alt="Times Internet">
+    <p>India MSME Dialogue: Atmanirbhar Udyam | Atmanirbhar Bharat &nbsp;·&nbsp; An Initiative by NavBharat Times &amp; Times Internet</p>
+    <p>&copy; 2025 Times Internet Limited. All rights reserved. &nbsp;·&nbsp; <a href="mailto:pawan.kumar3@timesinternet.in">Contact Us</a></p>
+  </footer>
 
-<script src="scripts.js" defer></script>
+  <script src="./scripts.js" defer></script>
 </body>
+
 </html>

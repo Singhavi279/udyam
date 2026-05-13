@@ -1,231 +1,420 @@
-/* =========================================================
-   India MSME Dialogue — UP Edition
-   Mobile-first interactions. Vanilla JS, no dependencies.
-   ========================================================= */
+/* India MSME Dialogue — experience layer
+   Behaviors: video carousel, cursor, reveals, counters, tilt,
+   horizontal tracks, magnetic CTA, sticky stats, preload curtain,
+   constellation positioning, edition map sync */
 
-(function () {
-  'use strict';
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fineCursor = window.matchMedia('(pointer: fine)').matches;
 
-  /* ------------------------------------------------------------------
-     1. Language toggle (Hindi default <-> English)
-     - Stores choice in localStorage
-     - Button label always shows the *target* language
-     - Minimal v1: toggles the document lang attribute and a body class.
-       Real translation would swap [data-i18n] strings; this hook is here
-       for that future work.
-  ------------------------------------------------------------------ */
-  var langToggle = document.getElementById('langToggle');
-  var STORAGE_KEY = 'msme-lang';
+/* ── PRE-LOAD CURTAIN ─────────────────────────────── */
+function initPreloadCurtain() {
+  const curtain = document.getElementById('curtain');
+  const fill = document.querySelector('.curtain-bar-fill');
+  if (!curtain) return;
 
-  function applyLang(lang) {
-    document.documentElement.lang = lang;
-    document.body.classList.toggle('lang-en', lang === 'en');
-    document.body.classList.toggle('lang-hi', lang === 'hi');
-    if (langToggle) langToggle.textContent = lang === 'hi' ? 'English' : 'हिंदी';
-  }
+  let progress = 0;
+  const tick = () => {
+    progress = Math.min(progress + Math.random() * 18, 100);
+    if (fill) fill.style.width = progress + '%';
+    if (progress < 100) setTimeout(tick, 110);
+  };
+  tick();
 
-  var savedLang = null;
-  try { savedLang = localStorage.getItem(STORAGE_KEY); } catch (_) {}
-  applyLang(savedLang === 'en' ? 'en' : 'hi');
+  const hide = () => {
+    if (fill) fill.style.width = '100%';
+    setTimeout(() => {
+      curtain.classList.add('gone');
+      setTimeout(() => { curtain.style.display = 'none'; }, 1400);
+    }, 320);
+  };
 
-  if (langToggle) {
-    langToggle.addEventListener('click', function () {
-      var next = document.documentElement.lang === 'hi' ? 'en' : 'hi';
-      try { localStorage.setItem(STORAGE_KEY, next); } catch (_) {}
-      applyLang(next);
-    });
-  }
+  const minDelay = new Promise(r => setTimeout(r, 1100));
+  const loadDone = new Promise(r => {
+    if (document.readyState === 'complete') r();
+    else window.addEventListener('load', r, { once: true });
+  });
+  Promise.all([minDelay, loadDone]).then(hide);
+  // hard fallback
+  setTimeout(hide, 3500);
+}
 
-  /* ------------------------------------------------------------------
-     2. Smooth-scroll offset for sticky nav (anchor links)
-     - CSS already has scroll-behavior:smooth, but sticky nav can hide
-       the section heading. We adjust the destination by nav height.
-  ------------------------------------------------------------------ */
-  var nav = document.getElementById('nav');
-  function scrollOffset() {
-    return (nav ? nav.offsetHeight : 0) + 8;
-  }
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var href = a.getAttribute('href');
-      if (!href || href === '#') return;
-      var target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      var top = target.getBoundingClientRect().top + window.pageYOffset - scrollOffset();
-      window.scrollTo({ top: top, behavior: 'smooth' });
-      history.replaceState(null, '', href);
-    });
+/* ── NAVBAR SCROLL STATE ──────────────────────────── */
+function initNavbar() {
+  const nav = document.getElementById('navbar');
+  if (!nav) return;
+  const update = () => nav.classList.toggle('scrolled', window.scrollY > 60);
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+}
+
+/* ── HERO VIDEO CAROUSEL ──────────────────────────── */
+function initVideoCarousel() {
+  const stack = document.querySelector('.hero-video-stack');
+  if (!stack || reducedMotion) return;
+  const videos = Array.from(stack.querySelectorAll('video'));
+  if (!videos.length) return;
+
+  videos.forEach((v, i) => {
+    v.muted = true;
+    v.playsInline = true;
+    v.loop = true;
+    if (i === 0) {
+      v.classList.add('active');
+      v.play().catch(() => {});
+    }
   });
 
-  /* ------------------------------------------------------------------
-     3. Sticky CTA visibility (hide once user reaches the form)
-  ------------------------------------------------------------------ */
-  var sticky = document.querySelector('.sticky-cta');
-  var applySection = document.getElementById('apply');
-  if (sticky && applySection && 'IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        sticky.style.display = entry.isIntersecting ? 'none' : '';
-      });
-    }, { rootMargin: '-40% 0px -40% 0px' });
-    io.observe(applySection);
-  }
-
-  /* ------------------------------------------------------------------
-     4. WhatsApp FAB — collapse to icon after 4 seconds, expand on hover
-  ------------------------------------------------------------------ */
-  var fab = document.querySelector('.fab');
-  if (fab) {
-    setTimeout(function () { fab.classList.add('is-collapsed'); }, 4000);
-    fab.addEventListener('mouseenter', function () { fab.classList.remove('is-collapsed'); });
-    fab.addEventListener('mouseleave', function () { fab.classList.add('is-collapsed'); });
-  }
-
-  /* ------------------------------------------------------------------
-     5. Form validation + submit (client-side only demo flow)
-     - Vernacular error messages (no Google-Translate-y phrasing)
-     - Saves draft to localStorage so a mid-form drop-off recovers
-     - On submit: shows the warm post-submit screen named in copywrite.md
-  ------------------------------------------------------------------ */
-  var form = document.getElementById('applyForm');
-  var success = document.getElementById('formSuccess');
-  var successName = document.getElementById('successName');
-  var DRAFT_KEY = 'msme-apply-draft';
-
-  if (form) {
-    // 5a. Restore draft
-    try {
-      var draftRaw = localStorage.getItem(DRAFT_KEY);
-      if (draftRaw) {
-        var draft = JSON.parse(draftRaw);
-        Object.keys(draft).forEach(function (name) {
-          var el = form.elements.namedItem(name);
-          if (el && typeof draft[name] === 'string') el.value = draft[name];
-        });
-      }
-    } catch (_) {}
-
-    // 5b. Persist draft on every change
-    form.addEventListener('input', function () {
-      var data = {};
-      Array.prototype.forEach.call(form.elements, function (el) {
-        if (el.name) data[el.name] = el.value;
-      });
-      try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch (_) {}
+  // Lazy-trigger load() on the rest 800ms after DOM ready
+  setTimeout(() => {
+    videos.slice(1).forEach(v => {
+      try { v.load(); } catch {}
     });
+  }, 800);
 
-    // 5c. Per-field validators (vernacular messages)
-    var validators = {
-      name: function (v) {
-        if (!v.trim()) return 'नाम छूट गया — एक second में लिख दीजिए।';
-        if (v.trim().length < 2) return 'पूरा नाम लिखिए।';
-        return '';
-      },
-      business: function (v) {
-        if (!v.trim()) return 'Business / दुकान / factory का नाम चाहिए।';
-        return '';
-      },
-      role: function (v) {
-        if (!v) return 'एक option चुनिए।';
-        return '';
-      },
-      city: function (v) {
-        if (!v.trim()) return 'District और state बताइए।';
-        return '';
-      },
-      sector: function (v) {
-        if (!v.trim()) return 'एक line में बताइए — क्या बनाते / बेचते हैं?';
-        return '';
-      },
-      whatsapp: function (v) {
-        var clean = (v || '').replace(/[^0-9]/g, '');
-        if (!clean) return 'WhatsApp number ज़रूरी है।';
-        if (clean.length < 10) return 'पूरा 10-digit number लिखिए।';
-        return '';
-      },
-      email: function (v) {
-        if (!v) return ''; // optional
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'Email सही नहीं लग रहा। दोबारा देख लीजिए।';
-        return '';
+  let idx = 0;
+  const advance = () => {
+    const next = (idx + 1) % videos.length;
+    videos[next].play().catch(() => {});
+    videos[next].classList.add('active');
+    videos[idx].classList.remove('active');
+    setTimeout(() => {
+      if (!videos[idx].classList.contains('active')) {
+        try { videos[idx].pause(); } catch {}
+      }
+    }, 1000);
+    idx = next;
+  };
+
+  setInterval(advance, 2800);
+
+  // Graceful fallback: if any video errors, just hide it
+  videos.forEach(v => {
+    v.addEventListener('error', () => {
+      v.style.display = 'none';
+    });
+  });
+}
+
+/* ── CUSTOM CURSOR ────────────────────────────────── */
+function initCursor() {
+  if (!fineCursor || reducedMotion) return;
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if (!dot || !ring) return;
+  document.body.classList.add('cursor-ready');
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let rx = mx, ry = my;
+
+  window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+  const render = () => {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+    requestAnimationFrame(render);
+  };
+  render();
+
+  const hoverable = 'a, button, .interactive, .track-card, .why-card, .exhibit-card, .edition-card, .who-tag, .cluster-chip, .stat-item, .big-stat';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(hoverable)) ring.classList.add('hover');
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(hoverable)) ring.classList.remove('hover');
+  });
+}
+
+/* ── REVEAL ANIMATIONS ────────────────────────────── */
+function initReveals() {
+  const items = document.querySelectorAll('.reveal, .reveal-mask, .reveal-tilt');
+  if (!items.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(el => obs.observe(el));
+}
+
+/* ── COUNTERS ─────────────────────────────────────── */
+function initCounters() {
+  const nums = document.querySelectorAll('[data-count]');
+  if (!nums.length) return;
+
+  // Reset to zero so the increment is visible
+  nums.forEach(el => {
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    el.textContent = prefix + '0' + suffix;
+  });
+
+  const run = el => {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals, 10) : 0;
+    const dur = 2400;
+    const t0 = performance.now();
+    el.classList.add('counting');
+    const tick = now => {
+      const p = Math.min((now - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 4);
+      const val = e * target;
+      const out = decimals ? val.toFixed(decimals) : Math.round(val).toLocaleString('en-IN');
+      el.textContent = prefix + out + suffix;
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.classList.remove('counting');
+        el.classList.add('counted');
       }
     };
+    requestAnimationFrame(tick);
+  };
 
-    function showError(field, msg) {
-      var wrap = field.closest('.field');
-      if (!wrap) return;
-      wrap.classList.toggle('is-error', !!msg);
-      var hint = wrap.querySelector('.hint');
-      if (hint) hint.textContent = msg || hint.dataset.defaultHint || '';
-    }
-
-    // capture default hints so we can restore them after errors clear
-    form.querySelectorAll('.hint').forEach(function (h) {
-      h.dataset.defaultHint = h.textContent;
-    });
-
-    // 5d. Inline validation on blur
-    Array.prototype.forEach.call(form.elements, function (el) {
-      if (!el.name || !validators[el.name]) return;
-      el.addEventListener('blur', function () {
-        showError(el, validators[el.name](el.value));
-      });
-    });
-
-    // 5e. Submit
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var firstInvalid = null;
-      Object.keys(validators).forEach(function (name) {
-        var el = form.elements.namedItem(name);
-        if (!el) return;
-        var msg = validators[name](el.value);
-        showError(el, msg);
-        if (msg && !firstInvalid) firstInvalid = el;
-      });
-
-      if (firstInvalid) {
-        firstInvalid.focus({ preventScroll: false });
-        return;
-      }
-
-      // Demo "submit": in production this hits a backend or Google Form.
-      // For now we simulate success and keep the experience warm.
-      var name = (form.elements.namedItem('name') || {}).value || '';
-      var firstName = name.split(' ')[0] || 'ji';
-      if (successName) successName.textContent = firstName + ' ji';
-
-      form.hidden = true;
-      if (success) {
-        success.hidden = false;
-        success.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
-      // Clear draft post-submit
-      try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
-    });
-  }
-
-  /* ------------------------------------------------------------------
-     6. Subtle scroll-in for cards (reduced-motion respected via CSS)
-  ------------------------------------------------------------------ */
-  if ('IntersectionObserver' in window) {
-    var revealEls = document.querySelectorAll('.card, .cluster, .edition, .fear, .tracks li, .contact');
-    revealEls.forEach(function (el) {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(12px)';
-      el.style.transition = 'opacity 240ms ease, transform 240ms ease';
-    });
-    var revealIO = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          revealIO.unobserve(entry.target);
+  const startObserving = () => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          run(e.target);
+          obs.unobserve(e.target);
         }
       });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-    revealEls.forEach(function (el) { revealIO.observe(el); });
-  }
+    }, { threshold: 0.25 });
+    nums.forEach(n => obs.observe(n));
+  };
 
-})();
+  // Defer until curtain is dismissed so the increment is seen
+  const curtain = document.getElementById('curtain');
+  if (curtain && !curtain.classList.contains('gone')) {
+    setTimeout(startObserving, 1500);
+  } else {
+    startObserving();
+  }
+}
+
+/* ── 3D TILT (stat cards, exhibit cards) ──────────── */
+function initTilt() {
+  if (!fineCursor || reducedMotion) return;
+  const cards = document.querySelectorAll('.stat-item, .big-stat, .exhibit-card, .contact-card, .edition-card');
+  cards.forEach(card => {
+    let raf = 0;
+    card.addEventListener('mousemove', e => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateY(-4px)`;
+      });
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+/* ── HORIZONTAL TRACKS ────────────────────────────── */
+function initHorizontalTracks() {
+  const pin = document.querySelector('.tracks-pin');
+  const rail = document.querySelector('.tracks-rail');
+  const fill = document.querySelector('.tracks-progress-fill');
+  const counter = document.querySelector('.tracks-counter strong');
+  if (!pin || !rail) return;
+  if (window.matchMedia('(max-width: 900px)').matches) return;
+
+  const cards = rail.querySelectorAll('.track-card');
+  const totalCards = cards.length;
+  const cardWidth = 400 + 28; // matches CSS
+
+  const update = () => {
+    const pr = pin.getBoundingClientRect();
+    const total = pin.offsetHeight - window.innerHeight;
+    const scrolled = Math.min(Math.max(-pr.top, 0), total);
+    const p = total > 0 ? scrolled / total : 0;
+    const maxShift = (totalCards * cardWidth) - window.innerWidth + 200;
+    rail.style.transform = `translateX(${-p * maxShift}px)`;
+    if (fill) fill.style.width = (10 + p * 90) + '%';
+    if (counter) counter.textContent = String(Math.min(totalCards, Math.max(1, Math.ceil(p * totalCards) || 1))).padStart(2, '0');
+  };
+
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+}
+
+/* ── MAGNETIC CTA ─────────────────────────────────── */
+function initMagneticCTA() {
+  if (!fineCursor || reducedMotion) return;
+  const btns = document.querySelectorAll('.hero-cta-btn, .final-cta-btn, .partner-cta-btn');
+  btns.forEach(b => {
+    b.addEventListener('mousemove', e => {
+      const r = b.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width / 2);
+      const y = e.clientY - (r.top + r.height / 2);
+      b.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+    });
+    b.addEventListener('mouseleave', () => { b.style.transform = ''; });
+  });
+}
+
+/* ── SCROLLYTELLING ABOUT ─────────────────────────── */
+function initAboutScrollytelling() {
+  const card = document.querySelector('.about-map-card');
+  const texts = document.querySelectorAll('.about-text');
+  if (!card) return;
+
+  const cardObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) card.classList.add('lit');
+    });
+  }, { threshold: 0.3 });
+  cardObs.observe(card);
+
+  // Focus paragraphs sequentially
+  texts.forEach((t, i) => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          texts.forEach(x => x.classList.remove('in-focus'));
+          t.classList.add('in-focus');
+        }
+      });
+    }, { threshold: 0.6 });
+    obs.observe(t);
+  });
+}
+
+/* ── CONSTELLATION POSITIONING ────────────────────── */
+function initConstellation() {
+  const wrap = document.querySelector('.constellation');
+  if (!wrap) return;
+  if (window.matchMedia('(max-width: 900px)').matches) return;
+
+  const tags = Array.from(wrap.querySelectorAll('.who-tag'));
+  const svg = wrap.querySelector('.constellation-svg');
+  const N = tags.length;
+  const layout = () => {
+    const w = wrap.clientWidth;
+    const h = wrap.clientHeight;
+    const cx = w / 2;
+    const cy = h / 2;
+    const rx = Math.min(w * 0.42, 520);
+    const ry = Math.min(h * 0.42, 240);
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+    tags.forEach((tag, i) => {
+      const angle = (i / N) * Math.PI * 2 - Math.PI / 2;
+      // alternate ring radius slightly
+      const k = i % 2 === 0 ? 1 : 0.7;
+      const x = cx + Math.cos(angle) * rx * k;
+      const y = cy + Math.sin(angle) * ry * k;
+      tag.style.left = x + 'px';
+      tag.style.top = y + 'px';
+      tag.style.setProperty('--delay', (i * 0.15) + 's');
+
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', cx);
+      line.setAttribute('y1', cy);
+      line.setAttribute('x2', x);
+      line.setAttribute('y2', y);
+      line.dataset.idx = i;
+      svg.appendChild(line);
+    });
+
+    tags.forEach((tag, i) => {
+      tag.addEventListener('mouseenter', () => {
+        svg.querySelectorAll('line').forEach(l => l.classList.add('dimmed'));
+        const ln = svg.querySelector(`line[data-idx="${i}"]`);
+        if (ln) {
+          ln.classList.remove('dimmed');
+          ln.classList.add('lit');
+        }
+        tags.forEach((t, j) => { if (j !== i) t.classList.add('dimmed'); });
+      });
+      tag.addEventListener('mouseleave', () => {
+        svg.querySelectorAll('line').forEach(l => { l.classList.remove('dimmed'); l.classList.remove('lit'); });
+        tags.forEach(t => t.classList.remove('dimmed'));
+      });
+    });
+  };
+
+  layout();
+  window.addEventListener('resize', () => {
+    // debounce
+    clearTimeout(window.__constellationT);
+    window.__constellationT = setTimeout(layout, 120);
+  });
+}
+
+/* ── EDITION MAP SYNC ─────────────────────────────── */
+function initEditionMapSync() {
+  const cards = document.querySelectorAll('.edition-card');
+  const blobs = document.querySelectorAll('.india-map-banner .state-blob');
+  if (!cards.length || !blobs.length) return;
+
+  const light = state => {
+    blobs.forEach(b => b.classList.toggle('active', b.dataset.state === state));
+  };
+
+  cards.forEach(c => {
+    c.addEventListener('mouseenter', () => light(c.dataset.state));
+    c.addEventListener('mouseleave', () => light(null));
+  });
+
+  // also tie to viewport center on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.6) {
+        light(e.target.dataset.state);
+      }
+    });
+  }, { threshold: [0.6] });
+  cards.forEach(c => obs.observe(c));
+}
+
+/* ── EXHIBIT ICON PARALLAX ────────────────────────── */
+function initExhibitParallax() {
+  if (reducedMotion) return;
+  const icons = document.querySelectorAll('.exhibit-card-icon');
+  if (!icons.length) return;
+  const update = () => {
+    icons.forEach(icon => {
+      const r = icon.getBoundingClientRect();
+      const center = window.innerHeight / 2;
+      const dist = (r.top + r.height / 2 - center) / window.innerHeight;
+      icon.style.transform = `translateY(${-dist * 12}px)`;
+    });
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+/* ── BOOTSTRAP ────────────────────────────────────── */
+function boot() {
+  initPreloadCurtain();
+  initNavbar();
+  initVideoCarousel();
+  initCursor();
+  initReveals();
+  initCounters();
+  initTilt();
+  initHorizontalTracks();
+  initMagneticCTA();
+  initAboutScrollytelling();
+  initConstellation();
+  initEditionMapSync();
+  initExhibitParallax();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
