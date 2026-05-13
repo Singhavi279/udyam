@@ -9,33 +9,92 @@ const fineCursor = window.matchMedia('(pointer: fine)').matches;
 /* ── PRE-LOAD CURTAIN ─────────────────────────────── */
 function initPreloadCurtain() {
   const curtain = document.getElementById('curtain');
-  const fill = document.querySelector('.curtain-bar-fill');
+  const fill    = document.querySelector('.curtain-bar-fill');
   if (!curtain) return;
 
+  /* ── Progress bar ── */
   let progress = 0;
-  const tick = () => {
-    progress = Math.min(progress + Math.random() * 18, 100);
+  const tickBar = () => {
+    progress = Math.min(progress + Math.random() * 14, 95);
     if (fill) fill.style.width = progress + '%';
-    if (progress < 100) setTimeout(tick, 110);
+    if (progress < 95) setTimeout(tickBar, 130);
   };
-  tick();
+  tickBar();
 
+  /* ── Typewriter ── */
+  const typedEl = document.getElementById('curtain-typed');
+  const fullText = 'Atmanirbhar Udyam · Atmanirbhar Bharat';
+  if (typedEl) {
+    let i = 0;
+    const type = () => {
+      typedEl.textContent = fullText.slice(0, i);
+      i++;
+      if (i <= fullText.length) {
+        // Natural pause after first phrase, then accelerate
+        const delay = i === 18 ? 320 : i < 18 ? 62 : 38;
+        setTimeout(type, delay);
+      }
+    };
+    setTimeout(type, 500);
+  }
+
+  /* ── Language cycler ── */
+  const badgeEl = document.getElementById('curtain-lang');
+  const textEl  = document.getElementById('curtain-lang-text');
+  const phrases = [
+    { lang: 'EN',  text: 'Make in India'        },
+    { lang: 'हिं', text: 'मेक इन इंडिया'        },
+    { lang: 'ಕನ',  text: 'ಮೇಕ್ ಇನ್ ಇಂಡಿಯಾ'     },
+    { lang: 'मरा', text: 'मेक इन इंडिया'        },
+    { lang: 'বাং', text: 'মেক ইন ইন্ডিয়া'      },
+    { lang: 'ગુ',  text: 'મેક ઇન ઇન્ડિયા'       },
+    { lang: 'EN',  text: 'Made in India'         },
+    { lang: 'हिं', text: 'मेड इन इंडिया'        },
+    { lang: 'ಕನ',  text: 'ಮೇಡ್ ಇನ್ ಇಂಡಿಯಾ'     },
+    { lang: 'मरा', text: 'मेड इन इंडिया'        },
+    { lang: 'বাং', text: 'মেড ইন ইন্ডিয়া'      },
+    { lang: 'ગુ',  text: 'મેઇડ ઇન ઇન્ડિયા'     },
+  ];
+
+  let phraseIdx = 0;
+  let cycleTimer = null;
+
+  const cycleLang = () => {
+    if (!badgeEl || !textEl) return;
+    badgeEl.style.opacity = '0';
+    textEl.style.opacity  = '0';
+    setTimeout(() => {
+      const p = phrases[phraseIdx];
+      badgeEl.textContent = p.lang;
+      textEl.textContent  = p.text;
+      badgeEl.style.opacity = '1';
+      textEl.style.opacity  = '1';
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+    }, 210);
+  };
+
+  setTimeout(() => {
+    cycleLang();
+    cycleTimer = setInterval(cycleLang, 720);
+  }, 900);
+
+  /* ── Dismiss ── */
   const hide = () => {
+    clearInterval(cycleTimer);
     if (fill) fill.style.width = '100%';
     setTimeout(() => {
       curtain.classList.add('gone');
       setTimeout(() => { curtain.style.display = 'none'; }, 1400);
-    }, 320);
+    }, 340);
   };
 
-  const minDelay = new Promise(r => setTimeout(r, 1100));
+  const minDelay = new Promise(r => setTimeout(r, 3100));
   const loadDone = new Promise(r => {
     if (document.readyState === 'complete') r();
     else window.addEventListener('load', r, { once: true });
   });
   Promise.all([minDelay, loadDone]).then(hide);
-  // hard fallback
-  setTimeout(hide, 3500);
+  setTimeout(hide, 5500); // hard safety fallback
 }
 
 /* ── NAVBAR SCROLL STATE ──────────────────────────── */
@@ -158,12 +217,12 @@ function initCounters() {
     const suffix = el.dataset.suffix || '';
     const prefix = el.dataset.prefix || '';
     const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals, 10) : 0;
-    const dur = 2400;
+    const dur = 1100;
     const t0 = performance.now();
     el.classList.add('counting');
     const tick = now => {
       const p = Math.min((now - t0) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 4);
+      const e = 1 - Math.pow(1 - p, 3);
       const val = e * target;
       const out = decimals ? val.toFixed(decimals) : Math.round(val).toLocaleString('en-IN');
       el.textContent = prefix + out + suffix;
@@ -185,14 +244,14 @@ function initCounters() {
           obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
     nums.forEach(n => obs.observe(n));
   };
 
-  // Defer until curtain is dismissed so the increment is seen
+  // Defer until curtain wipes away (curtain minDelay is 2600ms + ~340ms dismiss)
   const curtain = document.getElementById('curtain');
   if (curtain && !curtain.classList.contains('gone')) {
-    setTimeout(startObserving, 1500);
+    setTimeout(startObserving, 3600);
   } else {
     startObserving();
   }
@@ -230,14 +289,27 @@ function initHorizontalTracks() {
 
   const cards = rail.querySelectorAll('.track-card');
   const totalCards = cards.length;
-  const cardWidth = 400 + 28; // matches CSS
+
+  const getCardWidth = () => {
+    if (cards.length < 2) return 428;
+    // measure actual rendered gap from bounding rects
+    const r0 = cards[0].getBoundingClientRect();
+    const r1 = cards[1].getBoundingClientRect();
+    const gap = r1.left - r0.right;
+    return r0.width + gap;
+  };
 
   const update = () => {
     const pr = pin.getBoundingClientRect();
     const total = pin.offsetHeight - window.innerHeight;
     const scrolled = Math.min(Math.max(-pr.top, 0), total);
     const p = total > 0 ? scrolled / total : 0;
-    const maxShift = (totalCards * cardWidth) - window.innerWidth + 200;
+    const cardWidth = getCardWidth();
+    const cardW = cards[0].getBoundingClientRect().width;
+    // leftPad matches CSS: calc(50vw - 200px); bring last card fully into view with 80px right margin
+    const leftPad = window.innerWidth * 0.5 - 200;
+    const lastCardRight = leftPad + (totalCards - 1) * cardWidth + cardW;
+    const maxShift = lastCardRight - window.innerWidth + 80;
     rail.style.transform = `translateX(${-p * maxShift}px)`;
     if (fill) fill.style.width = (10 + p * 90) + '%';
     if (counter) counter.textContent = String(Math.min(totalCards, Math.max(1, Math.ceil(p * totalCards) || 1))).padStart(2, '0');
@@ -379,6 +451,19 @@ function initEditionMapSync() {
   cards.forEach(c => obs.observe(c));
 }
 
+/* ── WHY CARD TAP-TO-FLIP (touch devices) ────────── */
+function initWhyCardFlip() {
+  if (fineCursor) return; // desktop uses CSS :hover
+  const cards = document.querySelectorAll('.why-card');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const wasFlipped = card.classList.contains('flipped');
+      document.querySelectorAll('.why-card.flipped').forEach(c => c.classList.remove('flipped'));
+      if (!wasFlipped) card.classList.add('flipped');
+    });
+  });
+}
+
 /* ── EXHIBIT ICON PARALLAX ────────────────────────── */
 function initExhibitParallax() {
   if (reducedMotion) return;
@@ -411,6 +496,7 @@ function boot() {
   initConstellation();
   initEditionMapSync();
   initExhibitParallax();
+  initWhyCardFlip();
 }
 
 if (document.readyState === 'loading') {
