@@ -534,13 +534,16 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   flex-wrap: wrap;
   gap: 24px;
-  margin-bottom: 38px;
+  margin-top: 36px;
+  margin-bottom: 0;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.16);
   padding: 16px 32px;
   border-radius: 50px;
   backdrop-filter: blur(16px);
   box-shadow: 0 4px 24px rgba(6, 15, 37, 0.45);
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out-quart) 1.2s forwards;
 }
 
 .hero-initiative-label {
@@ -2651,6 +2654,86 @@ footer a { color: var(--saffron); }
   .why-card           { height: 200px; }
   .track-card         { flex: 0 0 92vw; }
   .stat-num           { font-size: clamp(1.5rem, 8vw, 2rem); }
+}
+
+/* ═══════════════════════════════════════════════════
+   SUB-HERO — chips, subtitle & CTA below the fold
+   ═══════════════════════════════════════════════════ */
+
+#sub-hero {
+  background: var(--navy-deep);
+  border-top: 1px solid rgba(255, 107, 26, 0.18);
+  padding: 52px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+#sub-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 0%, rgba(255, 107, 26, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 50% 100%, rgba(200, 150, 62, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.sub-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.sub-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* override event-subtitle-block for sub-hero context (light theme → dark theme) */
+#sub-hero .event-subtitle-block {
+  animation: none;
+  opacity: 1;
+  margin-bottom: 0;
+}
+
+#sub-hero .event-subtitle {
+  color: var(--gold-light);
+}
+
+#sub-hero .event-subtitle-hindi {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.sub-hero-cta-btn {
+  margin-top: 8px;
+  opacity: 0;
+  animation: fadeUp 0.9s var(--ease-out-quart) 0.3s forwards;
+}
+
+/* ── Multi-language subtitle flip ───────────────── */
+@keyframes subtitle-flip-out {
+  from { opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); }
+  to   { opacity: 0; transform: perspective(600px) rotateX(-25deg) translateY(-12px); }
+}
+
+@keyframes subtitle-flip-in {
+  from { opacity: 0; transform: perspective(600px) rotateX(25deg) translateY(12px); }
+  to   { opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); }
+}
+
+.hero-subtitle-flipping {
+  animation: subtitle-flip-out 0.28s ease forwards;
+}
+
+.hero-subtitle-flipped {
+  animation: subtitle-flip-in 0.38s var(--ease-out-quart) forwards;
 }
 
 /* ═══════════════════════════════════════════════════

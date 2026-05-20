@@ -481,6 +481,41 @@ function initExhibitParallax() {
   update();
 }
 
+/* ── MULTI-LANGUAGE SUBTITLE FLIP ─────────────────── */
+function initSubtitleFlip() {
+  const subtitle = document.getElementById('hero-subtitle-flip');
+  if (!subtitle || reducedMotion) return;
+
+  const phrases = [
+    { p1: 'Atmanirbhar\u00a0Udyam',        p2: 'Atmanirbhar\u00a0Bharat'        },
+    { p1: '\u0906\u0924\u094d\u092e\u0928\u093f\u0930\u094d\u092d\u0930\u00a0\u0909\u0926\u094d\u092f\u092e',       p2: '\u0906\u0924\u094d\u092e\u0928\u093f\u0930\u094d\u092d\u0930\u00a0\u092d\u093e\u0930\u0924'          },
+    { p1: '\u0c86\u0ca4\u0ccd\u0cae\u0ca8\u0cbf\u0cb0\u0ccd\u0cad\u0cb0\u0ccd\u00a0\u0c89\u0ca6\u0ccd\u0caf\u0cae',    p2: '\u0c86\u0ca4\u0ccd\u0cae\u0ca8\u0cbf\u0cb0\u0ccd\u0cad\u0cb0\u0ccd\u00a0\u0cad\u0cbe\u0cb0\u0ca4'     },
+    { p1: '\u0986\u09a4\u09cd\u09ae\u09a8\u09bf\u09b0\u09cd\u09ad\u09b0\u00a0\u0989\u09a6\u09cd\u09af\u09ae',    p2: '\u0986\u09a4\u09cd\u09ae\u09a8\u09bf\u09b0\u09cd\u09ad\u09b0\u00a0\u09ad\u09be\u09b0\u09a4'       },
+    { p1: '\u0a86\u0aa4\u0acd\u0aae\u0aa8\u0abf\u0ab0\u0acd\u0aad\u0ab0\u00a0\u0a89\u0aa6\u0acd\u0aaf\u0aae',   p2: '\u0a86\u0aa4\u0acd\u0aae\u0aa8\u0abf\u0ab0\u0acd\u0aad\u0ab0\u00a0\u0aad\u0abe\u0ab0\u0aa4'      },
+  ];
+
+  const accent = subtitle.querySelector('.word.accent');
+  const gold   = subtitle.querySelector('.word.gold');
+  if (!accent || !gold) return;
+
+  let idx = 0;
+
+  const flip = () => {
+    subtitle.classList.add('hero-subtitle-flipping');
+    setTimeout(() => {
+      idx = (idx + 1) % phrases.length;
+      accent.textContent = phrases[idx].p1;
+      gold.textContent   = phrases[idx].p2;
+      subtitle.classList.remove('hero-subtitle-flipping');
+      subtitle.classList.add('hero-subtitle-flipped');
+      setTimeout(() => subtitle.classList.remove('hero-subtitle-flipped'), 500);
+    }, 290);
+  };
+
+  // Start after preload curtain has cleared (~3.1s min + ~340ms dismiss + buffer)
+  setTimeout(() => setInterval(flip, 3200), 5200);
+}
+
 /* ── BOOTSTRAP ────────────────────────────────────── */
 function boot() {
   initPreloadCurtain();
@@ -497,6 +532,7 @@ function boot() {
   initEditionMapSync();
   initExhibitParallax();
   initWhyCardFlip();
+  initSubtitleFlip();
 }
 
 if (document.readyState === 'loading') {
