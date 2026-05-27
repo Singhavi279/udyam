@@ -173,46 +173,64 @@
 
       <form class="pf" id="register-form" novalidate>
 
+        <!-- Full name -->
         <div class="pf-field">
           <label class="pf-label" for="rf-name">Full Name <span class="pf-req">*</span></label>
           <input class="pf-input" type="text" id="rf-name" name="name" placeholder="Your full name" autocomplete="name" required>
         </div>
 
-        <div class="pf-row">
-          <div class="pf-field">
-            <label class="pf-label" for="rf-phone">Phone <span class="pf-req">*</span></label>
-            <input class="pf-input" type="tel" id="rf-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel" required>
-          </div>
-          <div class="pf-field">
-            <label class="pf-label" for="rf-email">Email <span class="pf-req">*</span></label>
-            <input class="pf-input" type="email" id="rf-email" name="email" placeholder="you@company.com" autocomplete="email" required>
-          </div>
+        <!-- Email -->
+        <div class="pf-field">
+          <label class="pf-label" for="rf-email">Email <span class="pf-req">*</span></label>
+          <input class="pf-input" type="email" id="rf-email" name="email" placeholder="you@company.com" autocomplete="email" required>
         </div>
 
+        <!-- Mobile + OTP -->
+        <div class="pf-field">
+          <label class="pf-label" for="rf-phone">Mobile <span class="pf-req">*</span></label>
+          <div class="pf-phone-row">
+            <input class="pf-input" type="tel" id="rf-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel" required>
+            <button type="button" class="pf-otp-send" id="rf-otp-send">Send OTP</button>
+          </div>
+          <div class="pf-otp-row" id="rf-otp-row" hidden>
+            <input class="pf-input pf-otp-input" type="text" id="rf-otp" name="otp" placeholder="6-digit OTP" maxlength="6" inputmode="numeric" pattern="[0-9]{6}">
+            <button type="button" class="pf-otp-verify" id="rf-otp-verify">Verify</button>
+          </div>
+          <div class="pf-verified" id="rf-phone-verified" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Mobile verified
+          </div>
+          <div class="pf-hint" id="rf-otp-hint" hidden></div>
+        </div>
+
+        <!-- Designation + Company -->
         <div class="pf-row">
           <div class="pf-field">
             <label class="pf-label" for="rf-designation">Designation <span class="pf-req">*</span></label>
             <input class="pf-input" type="text" id="rf-designation" name="designation" placeholder="CEO, Marketing Head…" required>
           </div>
           <div class="pf-field">
-            <label class="pf-label" for="rf-company">Company <span class="pf-req">*</span></label>
+            <label class="pf-label" for="rf-company">Company Name <span class="pf-req">*</span></label>
             <input class="pf-input" type="text" id="rf-company" name="company" placeholder="Your organisation" required>
           </div>
         </div>
 
-        <div class="pf-field">
-          <label class="pf-label" for="rf-city">City <span class="pf-optional">(optional)</span></label>
-          <input class="pf-input" type="text" id="rf-city" name="city" placeholder="e.g. Lucknow, Kanpur, Varanasi" autocomplete="address-level2">
-        </div>
+        <!-- Disclaimer -->
+        <label class="pf-consent">
+          <input type="checkbox" class="pf-consent-box" id="rf-consent" required>
+          <span class="pf-consent-text">
+            I confirm that the information provided is accurate and consent to being contacted by India MSME Dialogue and its initiative partners (NavBharat Times &amp; Times Internet) regarding event communications. Delegate registration is subject to confirmation by the organisers. Seats are limited and allotted at the organiser's discretion; right of admission reserved.
+          </span>
+        </label>
 
-        <button type="submit" class="pf-submit" id="rf-submit">Register Now</button>
+        <button type="submit" class="pf-submit" id="rf-submit">Submit Registration</button>
       </form>
 
       <!-- Success state -->
       <div class="pmodal-success" id="rmodal-success" hidden>
         <div class="pmodal-success-icon">✓</div>
-        <h3 class="pmodal-success-title">You're registered!</h3>
-        <p class="pmodal-success-sub">Confirmation will be sent to your email shortly. We look forward to hosting you.</p>
+        <h3 class="pmodal-success-title">Your interest has been registered</h3>
+        <p class="pmodal-success-sub">Thank you for your interest in the India MSME Dialogue. Our team will get back to you within <strong>48 hours</strong> to confirm your delegate seat.</p>
         <button class="pmodal-success-close" id="rmodal-success-close">Close</button>
       </div>
 
@@ -222,11 +240,21 @@
   <!-- ══ HERO ══ -->
   <section id="hero">
     <div class="hero-video-stack" aria-hidden="true">
-      <video class="active" muted loop playsinline preload="auto" src="./assets/office_cubicles.mp4"></video>
-      <video muted loop playsinline preload="metadata" src="./assets/handicraft.mp4"></video>
-      <video muted loop playsinline preload="metadata" src="./assets/diamond.mp4"></video>
-      <video muted loop playsinline preload="metadata" src="./assets/pharma.mp4"></video>
-      <video muted loop playsinline preload="metadata" src="./assets/food.mp4"></video>
+      <video class="active" muted loop playsinline preload="auto">
+        <source src="./assets/office_cubicles-compressed.mov" type="video/mp4">
+      </video>
+      <video muted loop playsinline preload="metadata">
+        <source src="./assets/handicraft-compressed.mov" type="video/mp4">
+      </video>
+      <video muted loop playsinline preload="metadata">
+        <source src="./assets/diamond-compressed.mov" type="video/mp4">
+      </video>
+      <video muted loop playsinline preload="metadata">
+        <source src="./assets/pharma-compressed.mov" type="video/mp4">
+      </video>
+      <video muted loop playsinline preload="metadata">
+        <source src="./assets/food-compressed.mov" type="video/mp4">
+      </video>
     </div>
     <div class="hero-veil"></div>
 

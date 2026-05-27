@@ -699,11 +699,11 @@ function initStateSelector() {
 
 /* ── REGISTRATION MODAL ───────────────────────────── */
 function initRegisterModal() {
-  const modal       = document.getElementById('register-modal');
-  const backdrop    = document.getElementById('rmodal-backdrop');
-  const closeBtn    = document.getElementById('rmodal-close');
-  const form        = document.getElementById('register-form');
-  const successEl   = document.getElementById('rmodal-success');
+  const modal        = document.getElementById('register-modal');
+  const backdrop     = document.getElementById('rmodal-backdrop');
+  const closeBtn     = document.getElementById('rmodal-close');
+  const form         = document.getElementById('register-form');
+  const successEl    = document.getElementById('rmodal-success');
   const successClose = document.getElementById('rmodal-success-close');
   if (!modal) return;
 
@@ -713,7 +713,32 @@ function initRegisterModal() {
     document.getElementById('hero-register-btn'),
   ];
 
+  /* ── OTP flow refs ── */
+  const phoneInput   = document.getElementById('rf-phone');
+  const sendBtn      = document.getElementById('rf-otp-send');
+  const otpRow       = document.getElementById('rf-otp-row');
+  const otpInput     = document.getElementById('rf-otp');
+  const verifyBtn    = document.getElementById('rf-otp-verify');
+  const verifiedEl   = document.getElementById('rf-phone-verified');
+  const otpHint      = document.getElementById('rf-otp-hint');
+  const consentBox   = document.getElementById('rf-consent');
+  let phoneVerified  = false;
+  let resendTimer    = null;
+
+  const resetForm = () => {
+    if (!form) return;
+    form.reset();
+    phoneVerified = false;
+    if (otpRow)      otpRow.hidden = true;
+    if (verifiedEl)  verifiedEl.hidden = true;
+    if (otpHint)     otpHint.hidden = true;
+    if (sendBtn)     { sendBtn.disabled = false; sendBtn.textContent = 'Send OTP'; }
+    if (resendTimer) { clearInterval(resendTimer); resendTimer = null; }
+    form.querySelectorAll('.pf-input, .pf-consent').forEach(el => el.classList.remove('error'));
+  };
+
   const open = () => {
+    resetForm();
     if (form && successEl) { form.hidden = false; successEl.hidden = true; }
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
@@ -732,7 +757,6 @@ function initRegisterModal() {
 
   triggers.forEach(t => t && t.addEventListener('click', e => {
     e.preventDefault();
-    // Close mobile nav drawer if open
     const hamburger = document.getElementById('nav-hamburger');
     const mobileNav = document.getElementById('nav-mobile');
     if (hamburger?.classList.contains('open')) {
@@ -750,12 +774,60 @@ function initRegisterModal() {
     if (e.key === 'Escape' && modal.classList.contains('open')) close();
   });
 
-  // Validation
+  /* ── OTP send/verify ── */
+  const startResendCountdown = () => {
+    sendBtn.disabled = true;
+    let secs = 30;
+    sendBtn.textContent = `Resend (${secs}s)`;
+    resendTimer = setInterval(() => {
+      secs--;
+      sendBtn.textContent = `Resend (${secs}s)`;
+      if (secs <= 0) {
+        clearInterval(resendTimer);
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Resend OTP';
+      }
+    }, 1000);
+  };
+
+  sendBtn?.addEventListener('click', () => {
+    const phone = phoneInput?.value.trim();
+    if (!phone || !/^[\d\s+\-()]{8,}$/.test(phone)) {
+      phoneInput?.classList.add('error');
+      phoneInput?.focus();
+      return;
+    }
+    phoneInput?.classList.remove('error');
+    otpRow.hidden = false;
+    otpHint.hidden = false;
+    otpHint.textContent = `OTP sent to ${phone}`;
+    otpInput?.focus();
+    startResendCountdown();
+  });
+
+  verifyBtn?.addEventListener('click', () => {
+    const code = otpInput?.value.trim();
+    if (!code || !/^\d{6}$/.test(code)) {
+      otpInput?.classList.add('error');
+      otpInput?.focus();
+      return;
+    }
+    phoneVerified = true;
+    otpInput?.classList.remove('error');
+    otpRow.hidden = true;
+    otpHint.hidden = true;
+    verifiedEl.hidden = false;
+    clearInterval(resendTimer);
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Verified';
+  });
+
+  /* ── Submit ── */
   form?.addEventListener('submit', e => {
     e.preventDefault();
     let valid = true;
 
-    form.querySelectorAll('[required]').forEach(el => {
+    form.querySelectorAll('input[type="text"][required], input[type="email"][required], input[type="tel"][required]').forEach(el => {
       const val = el.value.trim();
       let ok = !!val;
       if (ok && el.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
@@ -769,6 +841,18 @@ function initRegisterModal() {
       }
     });
 
+    if (!phoneVerified) {
+      phoneInput?.classList.add('error');
+      if (valid) phoneInput?.focus();
+      valid = false;
+    }
+
+    if (consentBox && !consentBox.checked) {
+      consentBox.closest('.pf-consent')?.classList.add('error');
+      if (valid) consentBox.focus();
+      valid = false;
+    }
+
     if (!valid) return;
 
     form.hidden = true;
@@ -777,6 +861,9 @@ function initRegisterModal() {
 
   form?.querySelectorAll('.pf-input').forEach(el => {
     el.addEventListener('input', () => el.classList.remove('error'));
+  });
+  consentBox?.addEventListener('change', () => {
+    consentBox.closest('.pf-consent')?.classList.remove('error');
   });
 }
 
