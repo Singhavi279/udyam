@@ -140,18 +140,25 @@ function initNavbar() {
   }
 
   // Active section highlighting via IntersectionObserver
-  const sections = ['hero', 'about', 'tracks', 'partner', 'contact'];
+  const sections = ['hero', 'about', 'tracks', 'who', 'partner', 'contact'];
   const navLinks  = nav.querySelectorAll('.nav-link');
 
   const setActive = id => {
     navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
   };
 
+  const visible = new Map();
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) setActive(e.target.id);
+      if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+      else visible.delete(e.target.id);
     });
-  }, { threshold: 0.35 });
+    if (visible.size) {
+      let topId = null, topRatio = -1;
+      visible.forEach((r, id) => { if (r > topRatio) { topRatio = r; topId = id; } });
+      if (topId) setActive(topId);
+    }
+  }, { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1], rootMargin: '-80px 0px -40% 0px' });
 
   sections.forEach(id => {
     const el = document.getElementById(id);
@@ -545,16 +552,18 @@ const aboutStates = {
   up: {
     name: 'Uttar Pradesh',
     nameLocal: 'उत्तर प्रदेश',
+    taglineLocal: 'एमएसएमई कॉन्क्लेव एवं पुरस्कार',
     tag: 'inaugural',
     tagLabel: 'Inaugural Edition',
     p1: `Uttar Pradesh sits at the centre of India's MSME engine, with over <strong>90 lakh enterprises</strong> driving employment, exports, and district-level industrialisation through initiatives like ODOP, digital single-window clearances, and targeted credit expansion. The state has built scale; the next challenge is coordination – connecting policy intent with capital, technology, compliance, and market access to unlock real growth.`,
     p2: `Achieving a <strong>$1 trillion economy</strong> target by 2030 demands sharper collaboration between government, MSMEs, investors, and solution providers across finance, technology, marketing, and regulatory support. The inaugural edition of the India MSME Dialogue in Uttar Pradesh will aim to create a focused platform to bring together decision-makers and enablers to address execution gaps, accelerate innovation, strengthen women-led enterprises, and convert the state's MSME base into a high-growth, globally competitive ecosystem.`,
     clusters: ['Kanpur · Leather', 'Firozabad · Glassware', 'Bhadohi · Carpets', 'Varanasi · Handloom', 'Moradabad · Brassware'],
-    map: './assets/up_map.png',
+    map: './assets/uttar_pradesh_map.png',
   },
   maharashtra: {
     name: 'Maharashtra',
     nameLocal: 'महाराष्ट्र',
+    taglineLocal: 'एमएसएमई कॉन्क्लेव्ह आणि पुरस्कार',
     tag: 'upcoming',
     tagLabel: 'Upcoming Edition',
     p1: `Maharashtra leads every state in MSME registrations, accounting for over <strong>1 crore enterprises</strong> — roughly 13% of all Udyam registrations nationally. The state's industrial presence spans pharmaceuticals, auto components, engineering, food processing, and more. Maharashtra is India's second-largest MSME exporting state by value, anchoring a significant share of the country's manufacturing output.`,
@@ -565,6 +574,7 @@ const aboutStates = {
   karnataka: {
     name: 'Karnataka',
     nameLocal: 'ಕರ್ನಾಟಕ',
+    taglineLocal: 'ಎಂಎಸ್‌ಎಂಇ ಕಾನ್‌ಕ್ಲೇವ್ ಮತ್ತು ಪ್ರಶಸ್ತಿಗಳು',
     tag: 'upcoming',
     tagLabel: 'Upcoming Edition',
     p1: `Karnataka leads India in innovation per NITI Aayog and contributes <strong>7% of the country's exports</strong>. The state's over 50 lakh Udyam MSME units span electronics, food processing, garments, auto components, and chemicals. Yet the state's own RAMP Strategic Investment Plan of 2023 flags that 40% of MSMEs are unaware of single-window clearances, while 78% seeks adequate maintenance of core public infrastructure like power, water, roads, and common facility centres.`,
@@ -575,16 +585,18 @@ const aboutStates = {
   wb: {
     name: 'West Bengal',
     nameLocal: 'পশ্চিমবঙ্গ',
+    taglineLocal: 'এমএসএমই কনক্লেভ ও পুরস্কার',
     tag: 'upcoming',
     tagLabel: 'Upcoming Edition',
     p1: `West Bengal has the <strong>second-largest MSME base in India</strong>, with around 90 lakh units. Development bank NABARD, in its state focus paper 2026–27, has estimated a priority sector lending potential of Rs 4 lakh crore for West Bengal for FY27, over half of which is for the MSME sector, reaffirming its role as the major driver of industrial growth. Despite this density, per capita GSDP remains below the national average.`,
     p2: `In this context, realising Atmanirbhar Bharat's promise in West Bengal requires connecting its unmatched enterprise base to formal credit, technology, and export markets. Hence, the West Bengal Summit and Awards will aim to be the platform to convene government, financial institutions, and industry to close that gap between West Bengal's MSME scale and its economic output.`,
     clusters: ['Kolkata · Leather', 'Durgapur · Heavy Engineering', 'South 24 Parganas · Textiles', 'Bankura · Handicrafts', 'Howrah · Light Engineering & Manufacturing'],
-    map: './assets/wb_map.png',
+    map: './assets/west_bengal_map.png',
   },
   gujarat: {
     name: 'Gujarat',
     nameLocal: 'ગુજરાત',
+    taglineLocal: 'એમએસએમઇ કોન્ક્લેવ અને પુરસ્કાર',
     tag: 'upcoming',
     tagLabel: 'Upcoming Edition',
     p1: `Gujarat retained its position as <strong>India's top exporting state</strong> in 2024–25, with merchandise exports amounting to around Rs 10 lakh crore — 26% of the country's total exports — led by petroleum products, gems and jewellery, organic chemicals, pharmaceuticals, and engineering goods. Over the past five years, the state has attracted Rs 86,418 crore in MSME sector investment and generated 3.98 lakh jobs.`,
@@ -605,14 +617,18 @@ function initStateSelector() {
 
   let activeState = 'up';
 
+  const aboutSection = document.getElementById('about');
+
   const closeMenu = () => {
     menu.classList.remove('open');
     trigger.setAttribute('aria-expanded', 'false');
+    aboutSection?.classList.remove('state-menu-open');
   };
 
   const openMenu = () => {
     menu.classList.add('open');
     trigger.setAttribute('aria-expanded', 'true');
+    aboutSection?.classList.add('state-menu-open');
   };
 
   trigger.addEventListener('click', e => {
@@ -637,7 +653,9 @@ function initStateSelector() {
     setTimeout(() => {
       // Heading
       const heading = document.getElementById('about-state-heading');
+      const tagline = document.getElementById('about-state-tagline');
       if (heading) heading.textContent = s.name;
+      if (tagline) tagline.textContent = 'MSME Conclave & Awards';
 
       // Top edition badge
       const editionBadge = document.getElementById('about-edition-badge');
@@ -880,6 +898,7 @@ function initPartnerModal() {
   const triggers = [
     document.getElementById('nav-partner-btn'),
     document.getElementById('nav-mobile-partner-btn'),
+    document.getElementById('hero-partner-btn'),
     document.querySelector('.partner-cta-btn'),
   ];
 
@@ -1019,9 +1038,12 @@ function initPartnerModal() {
 }
 
 /* ── ABOUT HEADING LANGUAGE FLIP ─────────────────── */
+const TAGLINE_EN = 'MSME Conclave & Awards';
+
 function initHeadingFlip() {
-  const el = document.getElementById('about-state-heading');
-  if (!el || reducedMotion) return;
+  const nameEl    = document.getElementById('about-state-heading');
+  const taglineEl = document.getElementById('about-state-tagline');
+  if (!nameEl || !taglineEl || reducedMotion) return;
 
   let state = 'up';
   let showLocal = false;
@@ -1029,21 +1051,26 @@ function initHeadingFlip() {
 
   const swap = () => {
     const s = aboutStates[state];
-    if (!s?.nameLocal) return;
-    el.classList.add('about-heading-flipping');
+    if (!s?.nameLocal || !s?.taglineLocal) return;
+    nameEl.classList.add('about-heading-flipping');
+    taglineEl.classList.add('about-heading-flipping');
     setTimeout(() => {
       showLocal = !showLocal;
-      el.textContent = showLocal ? s.nameLocal : s.name;
-      el.classList.remove('about-heading-flipping');
+      nameEl.textContent    = showLocal ? s.nameLocal    : s.name;
+      taglineEl.textContent = showLocal ? s.taglineLocal : TAGLINE_EN;
+      nameEl.classList.remove('about-heading-flipping');
+      taglineEl.classList.remove('about-heading-flipping');
     }, 240);
   };
 
   const restart = key => {
     if (timer) clearInterval(timer);
-    el.classList.remove('about-heading-flipping');
+    nameEl.classList.remove('about-heading-flipping');
+    taglineEl.classList.remove('about-heading-flipping');
     state = key;
     showLocal = false;
-    // slight delay so the content-switch animation settles first
+    // Make sure we start in English on state switch
+    taglineEl.textContent = TAGLINE_EN;
     setTimeout(() => { timer = setInterval(swap, 2800); }, 1000);
   };
 

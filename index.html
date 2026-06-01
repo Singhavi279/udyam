@@ -47,17 +47,19 @@
     </a>
 
     <ul class="nav-links" role="list">
-      <li><a href="#hero"    class="nav-link">About</a></li>
-      <li><a href="#about"   class="nav-link">States</a></li>
-      <li><a href="#tracks"  class="nav-link">Tracks</a></li>
+      <li><a href="#hero" class="nav-link">About</a></li>
+      <li><a href="#about" class="nav-link">States</a></li>
+      <li><a href="#tracks" class="nav-link">Tracks</a></li>
+      <li><a href="#who" class="nav-link">Attend</a></li>
       <li><a href="#partner" class="nav-link">Partner</a></li>
       <li><a href="#contact" class="nav-link">Contact Us</a></li>
     </ul>
 
     <div class="nav-right">
-      <button class="nav-partner-btn" id="nav-partner-btn">Partner Now</button>
       <button class="nav-cta" id="nav-register-btn" type="button">Register Now</button>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
+      <button class="nav-partner-btn" id="nav-partner-btn">Partner Now</button>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false"
+        aria-controls="nav-mobile">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -66,24 +68,28 @@
   <!-- Mobile drawer -->
   <div class="nav-mobile" id="nav-mobile" aria-hidden="true">
     <ul class="nav-mobile-links" role="list">
-      <li><a href="#hero"    class="nav-mobile-link">About</a></li>
-      <li><a href="#about"   class="nav-mobile-link">States</a></li>
-      <li><a href="#tracks"  class="nav-mobile-link">Tracks</a></li>
+      <li><a href="#hero" class="nav-mobile-link">About</a></li>
+      <li><a href="#about" class="nav-mobile-link">States</a></li>
+      <li><a href="#tracks" class="nav-mobile-link">Tracks</a></li>
       <li><a href="#partner" class="nav-mobile-link">Partner</a></li>
       <li><a href="#contact" class="nav-mobile-link">Contact Us</a></li>
     </ul>
     <div class="nav-mobile-actions">
-      <button class="nav-mobile-partner" id="nav-mobile-partner-btn">Partner Now</button>
       <button class="nav-mobile-cta" id="nav-mobile-register-btn" type="button">Register Now →</button>
+      <button class="nav-mobile-partner" id="nav-mobile-partner-btn">Partner Now</button>
     </div>
   </div>
 
   <!-- ══ PARTNERSHIP MODAL ══ -->
-  <div class="pmodal" id="partner-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pmodal-title">
+  <div class="pmodal" id="partner-modal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="pmodal-title">
     <div class="pmodal-backdrop" id="pmodal-backdrop"></div>
     <div class="pmodal-panel">
       <button class="pmodal-close" id="pmodal-close" aria-label="Close">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
       </button>
 
       <div class="pmodal-header">
@@ -97,22 +103,28 @@
         <!-- Name -->
         <div class="pf-field">
           <label class="pf-label" for="pf-name">Name <span class="pf-req">*</span></label>
-          <input class="pf-input" type="text" id="pf-name" name="name" placeholder="Your full name" autocomplete="name" required>
+          <input class="pf-input" type="text" id="pf-name" name="name" placeholder="Your full name" autocomplete="name"
+            required>
         </div>
 
         <!-- Phone + OTP -->
         <div class="pf-field">
           <label class="pf-label" for="pf-phone">Phone <span class="pf-req">*</span></label>
           <div class="pf-phone-row">
-            <input class="pf-input" type="tel" id="pf-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel" required>
+            <input class="pf-input" type="tel" id="pf-phone" name="phone" placeholder="+91 98765 43210"
+              autocomplete="tel" required>
             <button type="button" class="pf-otp-send" id="pf-otp-send">Send OTP</button>
           </div>
           <div class="pf-otp-row" id="pf-otp-row" hidden>
-            <input class="pf-input pf-otp-input" type="text" id="pf-otp" name="otp" placeholder="6-digit OTP" maxlength="6" inputmode="numeric" pattern="[0-9]{6}">
+            <input class="pf-input pf-otp-input" type="text" id="pf-otp" name="otp" placeholder="6-digit OTP"
+              maxlength="6" inputmode="numeric" pattern="[0-9]{6}">
             <button type="button" class="pf-otp-verify" id="pf-otp-verify">Verify</button>
           </div>
           <div class="pf-verified" id="pf-phone-verified" hidden>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Phone verified
           </div>
           <div class="pf-hint" id="pf-otp-hint" hidden></div>
@@ -121,7 +133,8 @@
         <!-- Email -->
         <div class="pf-field">
           <label class="pf-label" for="pf-email">Email <span class="pf-req">*</span></label>
-          <input class="pf-input" type="email" id="pf-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+          <input class="pf-input" type="email" id="pf-email" name="email" placeholder="you@company.com"
+            autocomplete="email" required>
           <div class="pf-hint">Work email preferred</div>
         </div>
 
@@ -129,7 +142,8 @@
         <div class="pf-row">
           <div class="pf-field">
             <label class="pf-label" for="pf-designation">Designation <span class="pf-req">*</span></label>
-            <input class="pf-input" type="text" id="pf-designation" name="designation" placeholder="CEO, Marketing Head…" required>
+            <input class="pf-input" type="text" id="pf-designation" name="designation"
+              placeholder="CEO, Marketing Head…" required>
           </div>
           <div class="pf-field">
             <label class="pf-label" for="pf-company">Company <span class="pf-req">*</span></label>
@@ -140,7 +154,8 @@
         <!-- Note -->
         <div class="pf-field">
           <label class="pf-label" for="pf-note">Add a Note <span class="pf-optional">(optional)</span></label>
-          <textarea class="pf-input pf-textarea" id="pf-note" name="note" placeholder="What partnership are you looking for?" rows="3"></textarea>
+          <textarea class="pf-input pf-textarea" id="pf-note" name="note"
+            placeholder="What partnership are you looking for?" rows="3"></textarea>
         </div>
 
         <button type="submit" class="pf-submit" id="pf-submit">Submit Enquiry</button>
@@ -158,11 +173,15 @@
   </div>
 
   <!-- ══ REGISTRATION MODAL ══ -->
-  <div class="pmodal" id="register-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rmodal-title">
+  <div class="pmodal" id="register-modal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="rmodal-title">
     <div class="pmodal-backdrop" id="rmodal-backdrop"></div>
     <div class="pmodal-panel">
       <button class="pmodal-close" id="rmodal-close" aria-label="Close">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
       </button>
 
       <div class="pmodal-header">
@@ -176,28 +195,35 @@
         <!-- Full name -->
         <div class="pf-field">
           <label class="pf-label" for="rf-name">Full Name <span class="pf-req">*</span></label>
-          <input class="pf-input" type="text" id="rf-name" name="name" placeholder="Your full name" autocomplete="name" required>
+          <input class="pf-input" type="text" id="rf-name" name="name" placeholder="Your full name" autocomplete="name"
+            required>
         </div>
 
         <!-- Email -->
         <div class="pf-field">
           <label class="pf-label" for="rf-email">Email <span class="pf-req">*</span></label>
-          <input class="pf-input" type="email" id="rf-email" name="email" placeholder="you@company.com" autocomplete="email" required>
+          <input class="pf-input" type="email" id="rf-email" name="email" placeholder="you@company.com"
+            autocomplete="email" required>
         </div>
 
         <!-- Mobile + OTP -->
         <div class="pf-field">
           <label class="pf-label" for="rf-phone">Mobile <span class="pf-req">*</span></label>
           <div class="pf-phone-row">
-            <input class="pf-input" type="tel" id="rf-phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel" required>
+            <input class="pf-input" type="tel" id="rf-phone" name="phone" placeholder="+91 98765 43210"
+              autocomplete="tel" required>
             <button type="button" class="pf-otp-send" id="rf-otp-send">Send OTP</button>
           </div>
           <div class="pf-otp-row" id="rf-otp-row" hidden>
-            <input class="pf-input pf-otp-input" type="text" id="rf-otp" name="otp" placeholder="6-digit OTP" maxlength="6" inputmode="numeric" pattern="[0-9]{6}">
+            <input class="pf-input pf-otp-input" type="text" id="rf-otp" name="otp" placeholder="6-digit OTP"
+              maxlength="6" inputmode="numeric" pattern="[0-9]{6}">
             <button type="button" class="pf-otp-verify" id="rf-otp-verify">Verify</button>
           </div>
           <div class="pf-verified" id="rf-phone-verified" hidden>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
             Mobile verified
           </div>
           <div class="pf-hint" id="rf-otp-hint" hidden></div>
@@ -207,7 +233,8 @@
         <div class="pf-row">
           <div class="pf-field">
             <label class="pf-label" for="rf-designation">Designation <span class="pf-req">*</span></label>
-            <input class="pf-input" type="text" id="rf-designation" name="designation" placeholder="CEO, Marketing Head…" required>
+            <input class="pf-input" type="text" id="rf-designation" name="designation"
+              placeholder="CEO, Marketing Head…" required>
           </div>
           <div class="pf-field">
             <label class="pf-label" for="rf-company">Company Name <span class="pf-req">*</span></label>
@@ -219,7 +246,10 @@
         <label class="pf-consent">
           <input type="checkbox" class="pf-consent-box" id="rf-consent" required>
           <span class="pf-consent-text">
-            I confirm that the information provided is accurate and consent to being contacted by India MSME Dialogue and its initiative partners (NavBharat Times &amp; Times Internet) regarding event communications. Delegate registration is subject to confirmation by the organisers. Seats are limited and allotted at the organiser's discretion; right of admission reserved.
+            I confirm that the information provided is accurate and consent to being contacted by India MSME Dialogue
+            and its initiative partners (NavBharat Times &amp; Times Internet) regarding event communications. Delegate
+            registration is subject to confirmation by the organisers. Seats are limited and allotted at the organiser's
+            discretion; right of admission reserved.
           </span>
         </label>
 
@@ -230,7 +260,8 @@
       <div class="pmodal-success" id="rmodal-success" hidden>
         <div class="pmodal-success-icon">✓</div>
         <h3 class="pmodal-success-title">Your interest has been registered</h3>
-        <p class="pmodal-success-sub">Thank you for your interest in the India MSME Dialogue. Our team will get back to you within <strong>48 hours</strong> to confirm your delegate seat.</p>
+        <p class="pmodal-success-sub">Thank you for your interest in the India MSME Dialogue. Our team will get back to
+          you within <strong>48 hours</strong> to confirm your delegate seat.</p>
         <button class="pmodal-success-close" id="rmodal-success-close">Close</button>
       </div>
 
@@ -278,6 +309,19 @@
         clusters – to foster focused discussions, collaboration, and inclusive growth for the backbone of India's
         industrial economy.
       </p>
+
+      <div class="hero-ctas">
+        <button class="hero-cta-btn" id="hero-register-btn" type="button">
+          <span>Register Now</span>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </button>
+        <button class="hero-cta-btn hero-cta-btn-ghost" id="hero-partner-btn" type="button">
+          <span>Partner Now</span>
+        </button>
+      </div>
 
       <div class="hero-initiative">
         <span class="hero-initiative-label">An Initiative By</span>
@@ -336,81 +380,50 @@
     </div>
   </section>
 
-  <!-- ══ SUB-HERO ══ -->
-  <section id="sub-hero">
-    <div class="container">
-      <div class="sub-hero-inner reveal">
-        <div class="sub-hero-chips">
-          <span class="inaugural-badge">Inaugural Edition</span>
-          <span class="location-chip">
-            <svg class="pin-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-            </svg>
-            Uttar Pradesh · MSME Conclave &amp; Awards
-          </span>
-        </div>
-        <div class="event-subtitle-block">
-          <span class="event-subtitle">MSME Conclave &amp; Awards</span>
-          <span class="event-subtitle-hindi">एमएसएमई कॉन्क्लेव एवं अवार्ड्स</span>
-        </div>
-        <button class="hero-cta-btn sub-hero-cta-btn" id="hero-register-btn" type="button">
-          <span>Register Now</span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
   <!-- ══ ABOUT ══ -->
   <section id="about">
     <div class="container">
       <div class="section-header reveal">
-        <div class="about-edition-tag">
+        <div class="about-header-row">
           <span class="about-edition-badge inaugural" id="about-edition-badge">★ Inaugural Edition</span>
+          <div class="about-state-dropdown" id="about-state-dropdown">
+            <button class="about-state-current" id="about-state-trigger" aria-haspopup="listbox" aria-expanded="false"
+              aria-controls="about-state-menu">
+              <span id="about-trigger-name">Uttar Pradesh</span>
+              <svg class="about-state-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+            <ul class="about-state-menu" id="about-state-menu" role="listbox" aria-label="Select state">
+              <li class="about-state-option active" data-state="up" role="option" aria-selected="true" tabindex="0">
+                <span class="about-state-badge inaugural">Inaugural</span>
+                Uttar Pradesh
+              </li>
+              <li class="about-state-option" data-state="maharashtra" role="option" aria-selected="false" tabindex="0">
+                <span class="about-state-badge upcoming">Upcoming</span>
+                Maharashtra
+              </li>
+              <li class="about-state-option" data-state="karnataka" role="option" aria-selected="false" tabindex="0">
+                <span class="about-state-badge upcoming">Upcoming</span>
+                Karnataka
+              </li>
+              <li class="about-state-option" data-state="wb" role="option" aria-selected="false" tabindex="0">
+                <span class="about-state-badge upcoming">Upcoming</span>
+                West Bengal
+              </li>
+              <li class="about-state-option" data-state="gujarat" role="option" aria-selected="false" tabindex="0">
+                <span class="about-state-badge upcoming">Upcoming</span>
+                Gujarat
+              </li>
+            </ul>
+          </div>
         </div>
-        <h2 class="section-h2"><span id="about-state-heading">Uttar Pradesh</span> &amp; the <em>MSME Opportunity</em>
+        <h2 class="section-h2">
+          <span class="section-h2-state" id="about-state-heading">Uttar Pradesh</span>
+          <em class="section-h2-tagline"><span id="about-state-tagline">MSME Conclave &amp; Awards</span></em>
         </h2>
         <div class="section-divider"></div>
-      </div>
-
-      <!-- State selector dropdown -->
-      <div class="about-state-selector reveal">
-        <div class="about-state-dropdown" id="about-state-dropdown">
-          <button class="about-state-current" id="about-state-trigger" aria-haspopup="listbox" aria-expanded="false"
-            aria-controls="about-state-menu">
-            <span id="about-trigger-name">Uttar Pradesh</span>
-            <svg class="about-state-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
-          </button>
-          <ul class="about-state-menu" id="about-state-menu" role="listbox" aria-label="Select state">
-            <li class="about-state-option active" data-state="up" role="option" aria-selected="true" tabindex="0">
-              <span class="about-state-badge inaugural">Inaugural</span>
-              Uttar Pradesh
-            </li>
-            <li class="about-state-option" data-state="maharashtra" role="option" aria-selected="false" tabindex="0">
-              <span class="about-state-badge upcoming">Upcoming</span>
-              Maharashtra
-            </li>
-            <li class="about-state-option" data-state="karnataka" role="option" aria-selected="false" tabindex="0">
-              <span class="about-state-badge upcoming">Upcoming</span>
-              Karnataka
-            </li>
-            <li class="about-state-option" data-state="wb" role="option" aria-selected="false" tabindex="0">
-              <span class="about-state-badge upcoming">Upcoming</span>
-              West Bengal
-            </li>
-            <li class="about-state-option" data-state="gujarat" role="option" aria-selected="false" tabindex="0">
-              <span class="about-state-badge upcoming">Upcoming</span>
-              Gujarat
-            </li>
-          </ul>
-        </div>
       </div>
 
       <div class="about-grid" id="about-grid">
@@ -434,28 +447,10 @@
           </p>
         </div>
 
-        <!-- RHS: map + clusters below -->
+        <!-- RHS: state map -->
         <div class="about-visual reveal-tilt" style="--i: 2">
-          <div class="about-map-wrap">
-            <div class="about-map-bg"></div>
-            <div class="about-map-card" id="about-map-card">
-              <img class="about-map-img" id="about-map-img" src="./assets/up_map.png" alt="Uttar Pradesh map">
-              <div class="about-map-label">
-                <small id="about-map-badge">Inaugural Edition</small>
-                <span id="about-map-state">Uttar Pradesh</span>
-              </div>
-            </div>
-          </div>
-          <div class="about-clusters">
-            <div class="about-clusters-label">Key Clusters</div>
-            <div class="about-clusters-chips" id="about-clusters-chips">
-              <span class="about-cluster-chip">Kanpur · Leather</span>
-              <span class="about-cluster-chip">Firozabad · Glassware</span>
-              <span class="about-cluster-chip">Bhadohi · Carpets</span>
-              <span class="about-cluster-chip">Varanasi · Handloom</span>
-              <span class="about-cluster-chip">Moradabad · Brassware</span>
-            </div>
-          </div>
+          <img class="responsive-state-map" id="about-map-img" src="./assets/uttar_pradesh_map.png"
+            alt="Uttar Pradesh map">
         </div>
 
       </div>
@@ -1055,45 +1050,45 @@
       <div class="editions-grid">
         <article class="edition-card reveal" style="--i: 1" data-state="maharashtra">
           <div class="edition-state">Maharashtra</div>
-          <div class="edition-script">मराठी</div>
+          <div class="edition-script">महाराष्ट्र</div>
           <div class="edition-sub-wrap">
             <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
-            <div class="edition-sub flip-reg">एमएसएमई कॉन्क्लेव्ह</div>
+            <div class="edition-sub flip-reg">एमएसएमई कॉन्क्लेव्ह आणि पुरस्कार</div>
           </div>
-          <a href="mailto:pawan.kumar3@timesinternet.in?subject=Maharashtra Edition" class="btn-outline">Express
+          <a href="mailto:gaurav.vats@timesinternet.in?subject=Maharashtra Edition" class="btn-outline">Express
             Interest →</a>
         </article>
 
         <article class="edition-card reveal" style="--i: 2" data-state="karnataka">
           <div class="edition-state">Karnataka</div>
-          <div class="edition-script">ಕನ್ನಡ</div>
+          <div class="edition-script">ಕರ್ನಾಟಕ</div>
           <div class="edition-sub-wrap">
             <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
-            <div class="edition-sub flip-reg">ಎಂಎಸ್ಎಂಇ ಕಾನ್ಕ್ಲೇವ್</div>
+            <div class="edition-sub flip-reg">ಎಂಎಸ್‌ಎಂಇ ಕಾನ್‌ಕ್ಲೇವ್ ಮತ್ತು ಪ್ರಶಸ್ತಿಗಳು</div>
           </div>
-          <a href="mailto:pawan.kumar3@timesinternet.in?subject=Karnataka Edition" class="btn-outline">Express Interest
+          <a href="mailto:gaurav.vats@timesinternet.in?subject=Karnataka Edition" class="btn-outline">Express Interest
             →</a>
         </article>
 
         <article class="edition-card reveal" style="--i: 3" data-state="wb">
           <div class="edition-state">West Bengal</div>
-          <div class="edition-script">বাংলা</div>
+          <div class="edition-script">পশ্চিমবঙ্গ</div>
           <div class="edition-sub-wrap">
             <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
-            <div class="edition-sub flip-reg">এমএসএমই কনক্লেভ</div>
+            <div class="edition-sub flip-reg">এমএসএমই কনক্লেভ ও পুরস্কার</div>
           </div>
-          <a href="mailto:pawan.kumar3@timesinternet.in?subject=West Bengal Edition" class="btn-outline">Express
+          <a href="mailto:gaurav.vats@timesinternet.in?subject=West Bengal Edition" class="btn-outline">Express
             Interest →</a>
         </article>
 
         <article class="edition-card reveal" style="--i: 4" data-state="gujarat">
           <div class="edition-state">Gujarat</div>
-          <div class="edition-script">ગુજરાતી</div>
+          <div class="edition-script">ગુજરાત</div>
           <div class="edition-sub-wrap">
             <div class="edition-sub flip-en">MSME Conclave &amp; Awards</div>
-            <div class="edition-sub flip-reg">એમએસએમઇ કોન્ક્લેવ</div>
+            <div class="edition-sub flip-reg">એમએસએમઇ કોન્ક્લેવ અને એવોર્ડ્સ</div>
           </div>
-          <a href="mailto:pawan.kumar3@timesinternet.in?subject=Gujarat Edition" class="btn-outline">Express Interest
+          <a href="mailto:gaurav.vats@timesinternet.in?subject=Gujarat Edition" class="btn-outline">Express Interest
             →</a>
         </article>
       </div>
@@ -1160,9 +1155,9 @@
   <footer>
     <img src="https://timesinternet.in/assets/images/logo-blue-new.png" alt="Times Internet">
     <p>India MSME Dialogue: Atmanirbhar Udyam | Atmanirbhar Bharat &nbsp;·&nbsp; An Initiative by NavBharat Times &amp;
-      Times Internet</p>
+      Times Internet Languages Live</p>
     <p>&copy; 2025 Times Internet Limited. All rights reserved. &nbsp;·&nbsp; <a
-        href="mailto:pawan.kumar3@timesinternet.in">Contact Us</a></p>
+        href="mailto:gaurav.vats@timesinternet.in">Contact Us</a></p>
   </footer>
 
   <script src="./scripts.js" defer></script>
