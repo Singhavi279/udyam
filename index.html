@@ -17,6 +17,75 @@
 
 <body>
 
+  <!-- ══ GRX + OTP SDKs ══ -->
+  <script src="https://static.growthrx.in/js/v2/web-sdk.js"></script>
+  <script src="https://navbharattimes.indiatimes.com/campaignhub/minifyjs/login/loginSupporter.js"></script>
+
+  <!-- ══ eventWire Config ══ -->
+  <script type="application/json" id="ch-event-config">
+  {
+    "eventKey": "india-msme-dialogue-udyam-2026",
+    "grxApiKey": "YOUR_GRX_API_KEY",
+    "grxTrackingName": "IndiaMMSMEDialogue-visitors",
+    "otp": {
+      "channel": "nbt",
+      "loginOptions": ["mobile"]
+    },
+    "forms": {
+      "registration": {
+        "modal": true,
+        "flow": ["phone", "otp", "details", "success"],
+        "otp": { "enabled": true, "resendSeconds": 60, "maxResends": 3 },
+        "fields": {
+          "required": ["name", "email", "phone", "designation", "company", "consent"],
+          "optional": []
+        },
+        "validationMessages": {
+          "name": { "required": "Please enter your full name." },
+          "email": {
+            "required": "Please enter your email address.",
+            "email": "Please enter a valid email address."
+          },
+          "phone": { "required": "Please enter your mobile number.", "phone": "Enter a valid 10-digit mobile number." },
+          "designation": { "required": "Please enter your designation." },
+          "company": { "required": "Please enter your company name." },
+          "consent": { "required": "Please accept the terms to continue." }
+        },
+        "payment": { "enabled": false },
+        "gate": "udyam_registered",
+        "analytics": { "label": "visitors", "trackOpen": true },
+        "successMessage": "Your interest has been registered! Our team will confirm your delegate seat within 48 hours."
+      },
+      "partnership": {
+        "modal": true,
+        "flow": ["phone", "otp", "details", "success"],
+        "otp": { "enabled": true, "resendSeconds": 60, "maxResends": 3 },
+        "fields": {
+          "required": ["name", "phone", "email", "designation", "company"],
+          "optional": ["note"]
+        },
+        "validationMessages": {
+          "name": { "required": "Please enter your full name." },
+          "email": {
+            "required": "Please enter your email address.",
+            "email": "Please enter a valid email address."
+          },
+          "phone": { "required": "Please enter your mobile number.", "phone": "Enter a valid 10-digit mobile number." },
+          "designation": { "required": "Please enter your designation." },
+          "company": { "required": "Please enter your company name." }
+        },
+        "payment": { "enabled": false },
+        "analytics": { "label": "partnership", "trackOpen": true },
+        "successMessage": "Enquiry received! Our partnerships team will reach out within 24 hours."
+      }
+    },
+    "modules": {
+      "exit_popup": { "enabled": false },
+      "sticky_cta": { "enabled": false }
+    }
+  }
+  </script>
+
   <!-- ══ PRE-LOAD CURTAIN ══ -->
   <div id="curtain" aria-hidden="true">
 
@@ -56,8 +125,8 @@
     </ul>
 
     <div class="nav-right">
-      <button class="nav-cta" id="nav-register-btn" type="button">Register Now</button>
-      <button class="nav-partner-btn" id="nav-partner-btn">Partner Now</button>
+      <button class="nav-cta" id="nav-register-btn" type="button" data-ch-cta="registration">Register Now</button>
+      <button class="nav-partner-btn" id="nav-partner-btn" type="button" data-ch-cta="partnership">Partner Now</button>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false"
         aria-controls="nav-mobile">
         <span></span><span></span><span></span>
@@ -75,17 +144,17 @@
       <li><a href="#contact" class="nav-mobile-link">Contact Us</a></li>
     </ul>
     <div class="nav-mobile-actions">
-      <button class="nav-mobile-cta" id="nav-mobile-register-btn" type="button">Register Now →</button>
-      <button class="nav-mobile-partner" id="nav-mobile-partner-btn">Partner Now</button>
+      <button class="nav-mobile-cta" id="nav-mobile-register-btn" type="button" data-ch-cta="registration">Register Now →</button>
+      <button class="nav-mobile-partner" id="nav-mobile-partner-btn" type="button" data-ch-cta="partnership">Partner Now</button>
     </div>
   </div>
 
   <!-- ══ PARTNERSHIP MODAL ══ -->
   <div class="pmodal" id="partner-modal" aria-hidden="true" role="dialog" aria-modal="true"
-    aria-labelledby="pmodal-title">
+    aria-labelledby="pmodal-title" data-ch-module="partnership">
     <div class="pmodal-backdrop" id="pmodal-backdrop"></div>
     <div class="pmodal-panel">
-      <button class="pmodal-close" id="pmodal-close" aria-label="Close">
+      <button class="pmodal-close" id="pmodal-close" aria-label="Close" data-ch-modal-close>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
           stroke-linecap="round">
           <path d="M18 6 6 18M6 6l12 12" />
@@ -101,24 +170,25 @@
       <form class="pf" id="partner-form" novalidate>
 
         <!-- Name -->
-        <div class="pf-field">
+        <div class="pf-field" data-ch-field-wrap="name">
           <label class="pf-label" for="pf-name">Name <span class="pf-req">*</span></label>
           <input class="pf-input" type="text" id="pf-name" name="name" placeholder="Your full name" autocomplete="name"
-            required>
+            required data-ch-field="name">
+          <span data-ch-error="name"></span>
         </div>
 
         <!-- Phone + OTP -->
-        <div class="pf-field">
+        <div class="pf-field" data-ch-field-wrap="phone">
           <label class="pf-label" for="pf-phone">Phone <span class="pf-req">*</span></label>
           <div class="pf-phone-row">
             <input class="pf-input" type="tel" id="pf-phone" name="phone" placeholder="+91 98765 43210"
-              autocomplete="tel" required>
-            <button type="button" class="pf-otp-send" id="pf-otp-send">Send OTP</button>
+              autocomplete="tel" required data-ch-otp="phone" data-ch-field="phone">
+            <button type="button" class="pf-otp-send" id="pf-otp-send" data-ch-otp="send">Send OTP</button>
           </div>
           <div class="pf-otp-row" id="pf-otp-row" hidden>
             <input class="pf-input pf-otp-input" type="text" id="pf-otp" name="otp" placeholder="6-digit OTP"
-              maxlength="6" inputmode="numeric" pattern="[0-9]{6}">
-            <button type="button" class="pf-otp-verify" id="pf-otp-verify">Verify</button>
+              maxlength="6" inputmode="numeric" pattern="[0-9]{6}" data-ch-otp="code">
+            <button type="button" class="pf-otp-verify" id="pf-otp-verify" data-ch-otp="verify">Verify</button>
           </div>
           <div class="pf-verified" id="pf-phone-verified" hidden>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -127,46 +197,50 @@
             </svg>
             Phone verified
           </div>
-          <div class="pf-hint" id="pf-otp-hint" hidden></div>
+          <div class="pf-hint" id="pf-otp-hint" hidden data-ch-otp="status"></div>
+          <span data-ch-error="phone"></span>
         </div>
 
         <!-- Email -->
-        <div class="pf-field">
+        <div class="pf-field" data-ch-field-wrap="email">
           <label class="pf-label" for="pf-email">Email <span class="pf-req">*</span></label>
           <input class="pf-input" type="email" id="pf-email" name="email" placeholder="you@company.com"
-            autocomplete="email" required>
+            autocomplete="email" required data-ch-field="email" data-ch-validate="email">
           <div class="pf-hint">Work email preferred</div>
+          <span data-ch-error="email"></span>
         </div>
 
         <!-- Designation + Company (2-col on desktop) -->
         <div class="pf-row">
-          <div class="pf-field">
+          <div class="pf-field" data-ch-field-wrap="designation">
             <label class="pf-label" for="pf-designation">Designation <span class="pf-req">*</span></label>
             <input class="pf-input" type="text" id="pf-designation" name="designation"
-              placeholder="CEO, Marketing Head…" required>
+              placeholder="CEO, Marketing Head…" required data-ch-field="designation">
+            <span data-ch-error="designation"></span>
           </div>
-          <div class="pf-field">
+          <div class="pf-field" data-ch-field-wrap="company">
             <label class="pf-label" for="pf-company">Company <span class="pf-req">*</span></label>
-            <input class="pf-input" type="text" id="pf-company" name="company" placeholder="Organisation name" required>
+            <input class="pf-input" type="text" id="pf-company" name="company" placeholder="Organisation name" required data-ch-field="company">
+            <span data-ch-error="company"></span>
           </div>
         </div>
 
         <!-- Note -->
-        <div class="pf-field">
+        <div class="pf-field" data-ch-field-wrap="note">
           <label class="pf-label" for="pf-note">Add a Note <span class="pf-optional">(optional)</span></label>
           <textarea class="pf-input pf-textarea" id="pf-note" name="note"
-            placeholder="What partnership are you looking for?" rows="3"></textarea>
+            placeholder="What partnership are you looking for?" rows="3" data-ch-field="note"></textarea>
         </div>
 
-        <button type="submit" class="pf-submit" id="pf-submit">Submit Enquiry</button>
+        <button type="submit" class="pf-submit" id="pf-submit" data-ch-submit>Submit Enquiry</button>
       </form>
 
       <!-- Success state -->
-      <div class="pmodal-success" id="pmodal-success" hidden>
+      <div class="pmodal-success" id="pmodal-success" hidden data-ch-view="success">
         <div class="pmodal-success-icon">✓</div>
         <h3 class="pmodal-success-title">Enquiry received!</h3>
-        <p class="pmodal-success-sub">Our partnerships team will reach out to you within 24 hours.</p>
-        <button class="pmodal-success-close" id="pmodal-success-close">Close</button>
+        <p class="pmodal-success-sub" data-ch-success-message>Our partnerships team will reach out to you within 24 hours.</p>
+        <button class="pmodal-success-close" id="pmodal-success-close" data-ch-modal-close>Close</button>
       </div>
 
     </div>
@@ -174,10 +248,10 @@
 
   <!-- ══ REGISTRATION MODAL ══ -->
   <div class="pmodal" id="register-modal" aria-hidden="true" role="dialog" aria-modal="true"
-    aria-labelledby="rmodal-title">
+    aria-labelledby="rmodal-title" data-ch-module="registration">
     <div class="pmodal-backdrop" id="rmodal-backdrop"></div>
     <div class="pmodal-panel">
-      <button class="pmodal-close" id="rmodal-close" aria-label="Close">
+      <button class="pmodal-close" id="rmodal-close" aria-label="Close" data-ch-modal-close>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
           stroke-linecap="round">
           <path d="M18 6 6 18M6 6l12 12" />
@@ -193,31 +267,33 @@
       <form class="pf" id="register-form" novalidate>
 
         <!-- Full name -->
-        <div class="pf-field">
+        <div class="pf-field" data-ch-field-wrap="name">
           <label class="pf-label" for="rf-name">Full Name <span class="pf-req">*</span></label>
           <input class="pf-input" type="text" id="rf-name" name="name" placeholder="Your full name" autocomplete="name"
-            required>
+            required data-ch-field="name">
+          <span data-ch-error="name"></span>
         </div>
 
         <!-- Email -->
-        <div class="pf-field">
+        <div class="pf-field" data-ch-field-wrap="email">
           <label class="pf-label" for="rf-email">Email <span class="pf-req">*</span></label>
           <input class="pf-input" type="email" id="rf-email" name="email" placeholder="you@company.com"
-            autocomplete="email" required>
+            autocomplete="email" required data-ch-field="email" data-ch-validate="email">
+          <span data-ch-error="email"></span>
         </div>
 
         <!-- Mobile + OTP -->
-        <div class="pf-field">
+        <div class="pf-field" data-ch-field-wrap="phone">
           <label class="pf-label" for="rf-phone">Mobile <span class="pf-req">*</span></label>
           <div class="pf-phone-row">
             <input class="pf-input" type="tel" id="rf-phone" name="phone" placeholder="+91 98765 43210"
-              autocomplete="tel" required>
-            <button type="button" class="pf-otp-send" id="rf-otp-send">Send OTP</button>
+              autocomplete="tel" required data-ch-otp="phone" data-ch-field="phone">
+            <button type="button" class="pf-otp-send" id="rf-otp-send" data-ch-otp="send">Send OTP</button>
           </div>
           <div class="pf-otp-row" id="rf-otp-row" hidden>
             <input class="pf-input pf-otp-input" type="text" id="rf-otp" name="otp" placeholder="6-digit OTP"
-              maxlength="6" inputmode="numeric" pattern="[0-9]{6}">
-            <button type="button" class="pf-otp-verify" id="rf-otp-verify">Verify</button>
+              maxlength="6" inputmode="numeric" pattern="[0-9]{6}" data-ch-otp="code">
+            <button type="button" class="pf-otp-verify" id="rf-otp-verify" data-ch-otp="verify">Verify</button>
           </div>
           <div class="pf-verified" id="rf-phone-verified" hidden>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
@@ -226,25 +302,28 @@
             </svg>
             Mobile verified
           </div>
-          <div class="pf-hint" id="rf-otp-hint" hidden></div>
+          <div class="pf-hint" id="rf-otp-hint" hidden data-ch-otp="status"></div>
+          <span data-ch-error="phone"></span>
         </div>
 
         <!-- Designation + Company -->
         <div class="pf-row">
-          <div class="pf-field">
+          <div class="pf-field" data-ch-field-wrap="designation">
             <label class="pf-label" for="rf-designation">Designation <span class="pf-req">*</span></label>
             <input class="pf-input" type="text" id="rf-designation" name="designation"
-              placeholder="CEO, Marketing Head…" required>
+              placeholder="CEO, Marketing Head…" required data-ch-field="designation">
+            <span data-ch-error="designation"></span>
           </div>
-          <div class="pf-field">
+          <div class="pf-field" data-ch-field-wrap="company">
             <label class="pf-label" for="rf-company">Company Name <span class="pf-req">*</span></label>
-            <input class="pf-input" type="text" id="rf-company" name="company" placeholder="Your organisation" required>
+            <input class="pf-input" type="text" id="rf-company" name="company" placeholder="Your organisation" required data-ch-field="company">
+            <span data-ch-error="company"></span>
           </div>
         </div>
 
         <!-- Disclaimer -->
         <label class="pf-consent">
-          <input type="checkbox" class="pf-consent-box" id="rf-consent" required>
+          <input type="checkbox" class="pf-consent-box" id="rf-consent" required data-ch-field="consent">
           <span class="pf-consent-text">
             I confirm that the information provided is accurate and consent to being contacted by India MSME Dialogue
             and its initiative partners (NavBharat Times &amp; Times Internet) regarding event communications. Delegate
@@ -252,17 +331,18 @@
             discretion; right of admission reserved.
           </span>
         </label>
+        <span data-ch-error="consent"></span>
 
-        <button type="submit" class="pf-submit" id="rf-submit">Submit Registration</button>
+        <button type="submit" class="pf-submit" id="rf-submit" data-ch-submit>Submit Registration</button>
       </form>
 
       <!-- Success state -->
-      <div class="pmodal-success" id="rmodal-success" hidden>
+      <div class="pmodal-success" id="rmodal-success" hidden data-ch-view="success">
         <div class="pmodal-success-icon">✓</div>
         <h3 class="pmodal-success-title">Your interest has been registered</h3>
-        <p class="pmodal-success-sub">Thank you for your interest in the India MSME Dialogue. Our team will get back to
+        <p class="pmodal-success-sub" data-ch-success-message>Thank you for your interest in the India MSME Dialogue. Our team will get back to
           you within <strong>48 hours</strong> to confirm your delegate seat.</p>
-        <button class="pmodal-success-close" id="rmodal-success-close">Close</button>
+        <button class="pmodal-success-close" id="rmodal-success-close" data-ch-modal-close>Close</button>
       </div>
 
     </div>
@@ -311,14 +391,14 @@
       </p>
 
       <div class="hero-ctas">
-        <button class="hero-cta-btn" id="hero-register-btn" type="button">
+        <button class="hero-cta-btn" id="hero-register-btn" type="button" data-ch-cta="registration">
           <span>Register Now</span>
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M13 5l7 7-7 7" />
           </svg>
         </button>
-        <button class="hero-cta-btn hero-cta-btn-ghost" id="hero-partner-btn" type="button">
+        <button class="hero-cta-btn hero-cta-btn-ghost" id="hero-partner-btn" type="button" data-ch-cta="partnership">
           <span>Partner Now</span>
         </button>
       </div>
@@ -1161,6 +1241,7 @@
   </footer>
 
   <script src="./scripts.js" defer></script>
+  <script src="https://langcampaignhub.indiatimes.com/campaignhub/js/eventWire-loader.js"></script>
 </body>
 
 </html>

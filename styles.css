@@ -111,6 +111,11 @@ button { font-family: inherit; }
   min-height: 44px;
 }
 
+/* ── eventWire-loader.js baseline contract ───────────────── */
+[data-ch-error] { display: none; color: #d93025; font-size: 12px; margin-top: 5px; }
+[data-ch-error].show { display: block; visibility: visible; opacity: 1; }
+input.is-invalid, select.is-invalid, textarea.is-invalid { border-color: #d93025 !important; }
+
 .container {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -1048,6 +1053,12 @@ button { font-family: inherit; }
 .hero-h1 .line {
   display: block;
   overflow: hidden;
+}
+
+/* Language-flip subtitle must not be clipped during 3D rotation */
+.hero-h1 .line.sublime {
+  overflow: visible;
+  padding: 4px 0;
 }
 
 .hero-h1 .word {
@@ -2579,9 +2590,9 @@ section {
 
 .edition-sub-wrap {
   position: relative;
-  height: 30px;
+  height: 40px;
   margin: 12px 0 22px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .edition-sub {
